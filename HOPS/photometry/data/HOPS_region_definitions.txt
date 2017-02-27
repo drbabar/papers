@@ -1,0 +1,55 @@
+#
+# Amy's definitons for PBR paper
+#
+#;get all region names
+#  il1622 = where(resf.dec gt 1.5 and resf.dec lt 2.0833)
+#  ingc2068 = where(resf.dec gt -0.5 and resf.dec lt 0.9166)
+#  ingc2024 = where(resf.dec gt -2.66667 and resf.dec lt -0.75)
+#  il1641 = where(resf.dec lt -6.5)
+#  ionc = where(resf.dec gt -6.5 and resf.dec lt -3.833)
+#  ikori = where(resf.group eq '053')
+#
+#  resf[il1622].region = 'L1622'
+#  resf[ingc2068].region = 'NGC2068'
+#  resf[ingc2024].region = 'NGC2024'
+#  resf[il1641].region = 'L1641'
+#  resf[ionc].region = 'ONC'
+#  resf[ikori].region = 'kOri'
+#
+#
+# Will's classification on the Wiki
+# https://nhscsci.ipac.caltech.edu/HOPS/index.php/Main/GroupLocations
+#
+#  Region         Dec        Groups
+#  L 1622     [+1:30,+2:00]  0, 1, 3, 4
+#  NGC 2068   [−0:15,+0:45]  91, 92, 93, 94, 95, 96, 97, 98, 128, 300, 301, 302, 303
+#  NGC 2024   [−2:30,−1:15]  80, 81, 82, 83, 84, 85, 86, 88, 89, 90
+#  OMC 3      [−5:05,−4:30]  19, 20, 21, 24, 306, 307
+#  OMC 2      [−5:15,−5:05]  130, 135, 200
+#  ONC-S      [−6:00,−5:15]  5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 308
+#  L 1641-N   [−7:15,−6:00]  29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 47, 48, 49, 50, 51, 52, 101, 310, 311, 312
+#  L 1641-C   [−8:20,−7:15]  25, 26, 28, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 118, 119, 121, 123, 313, 314, 320
+#  L 1641-S   [−9:00,−8:20]  53, 54, 55, 56, 58, 59, 60, 117
+#
+#
+#
+# Proposed Consolidated region definitions
+#
+#  Region     | Dec. boundary (deg.) |           Source     |
+#             |   Low     |   High   |    Low      |  High  |
+#
+     name     |  decLow   |  decHigh | refLow      | refHigh |
+  LDN 1622    |   1.3     |   2.0833 |  Amy & Will |  Amy   |
+  NGC 2068    |  -0.5     |   1.3    |  Amy        |  Amy   |
+  NGC 2023-4  |  -3.83    |  -0.5    |  Amy        |  Amy   |
+#  OMC 2-3     |  -5.25    |  -3.83   |  Will       |  Amy   |
+#  ONC-S       |  -6.50    |  -5.25   |  Amy        |  Will  |
+#  LDN 1641-N  |  -7.25    |  -6.50   |  Will       |  Will  |
+#  LDN 1641-C  |  -8.33333 |  -7.25   |  Will       |  Will  |
+#  LDN 1641-S  |  -9.0     |  -8.3333 |  Will       |  Will  |
+#  kap Ori     |    -      |    -     |  Amy        |  Amy   | Group 53
+  OMC 2-3     |  -5.30    |  -3.83   |  Will       |  Amy   |
+  ONC-S       |  -6.10    |  -5.30   |  Amy        |  Will  |
+  LDN 1641-N  |  -6.90    |  -6.10   |  Will       |  Will  |
+  LDN 1641-C  |  -7.60    |  -6.90   |  Will       |  Will  |
+  LDN 1641-S  |  -9.0     |  -7.60   |  Will       |  Will  |
