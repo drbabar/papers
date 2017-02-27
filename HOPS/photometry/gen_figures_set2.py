@@ -1,11 +1,4 @@
-good_rows = (hopsphot["F70"] > 1.e-4) & (hopsphot["f_F70"] == 1) &\
-            (hopsphot["F100"] > 1.e-4) & (hopsphot["f_F100"] == 1) &\
-            (hopsphot["F160"] > 1.e-4) & (hopsphot["f_F160"] == 1) &\
-            (hopsphot["f_F24"] == 1)
 
-hops_good = hopsphot[good_rows]
-hops_good['clr1'] = np.log10((70. * hops_good["F70"]) / (24. * hops_good["F24"]))
-hops_good['clr2'] = np.log10((160. * hops_good["F160"]) / (100. * hops_good["F100"]))
 #
 
 # test, not really any good.
@@ -24,41 +17,7 @@ plt.show()
 
 # Generate color-color plots.
 
-def gen_clrclr_by_region(hops_df, hopsx, hopsy, figname=None,
-                         xlims=[0.3, 3.7], ylims=[-0.3, 1.0],
-                         color="purple", all_color="black", width=6, height=8,
-                         hspace=0.02, wspace=0.02, style="ticks"):
-    grp_df = hops_df.groupby('region')
-    sns.set_style(style)
-    sns.despine()
-    f, pTups = plt.subplots(nrows=len(grp_df.groups.keys()), ncols=1, sharex=True, sharey=True)
-    f.set_figwidth(width)
-    f.set_figheight(height)
-    f.subplots_adjust(hspace=hspace)
-    f.subplots_adjust(wspace=wspace)
-    kws1 = {'color': all_color, 'marker': '.'}
-    kws2 = {'color': color, 'marker': 'o'}
-    i = 0
-    for name, df in grp_df:
-        sns.regplot(x=hopsx, y=hopsy, ax=pTups[i], fit_reg=False, scatter_kws=kws1)
-        sns.regplot(x=df['clr1'], y=df['clr2'], fit_reg=False, ax=pTups[i], scatter_kws=kws2)
-        pTups[i].set_ylabel(" ")
-        pTups[i].text(2.8, -0.1, name)
-        i = i + 1
-    pTups[-1].set_xlabel("Log$_{10}\ \lambda F_{\lambda}\ 70 / \lambda F_{\lambda}\ 24$")
-    pTups[1].set_ylabel("Log$_{10}\ \lambda F_{\lambda}\ 160 /\lambda F_{\lambda}\ 100$")
-    plt.xlim(xlims[0], xlims[1])
-    plt.ylim(ylims[0], ylims[1])
-    sns.despine()
-    if figname is not None:
-        plt.savefig(figname)
-    return
 
-gen_clrclr_by_region(hops_good[hops_good['cloud'] == 'A'], hops_good['clr1'], hops_good['clr2'],
-                     figname="{}{}OrionA_clrclr.eps".format(top_dir, plot_dir),
-                     hspace=0.05,
-                     color=red, all_color=grey)
-plt.show()
 
 gen_clrclr_by_region(hops_good[hops_good['cloud'] == 'B'], hops_good['clr1'], hops_good['clr2'],
                      figname="{}{}OrionB_clrclr.eps".format(top_dir, plot_dir),

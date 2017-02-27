@@ -80,3 +80,21 @@ plt.xlabel("<$\delta$> (degrees)")
 plt.ylabel("Median $F_{\lambda}$ (Jy)")
 plt.tight_layout()
 plt.savefig("{}mdFlux_v_dec.eps".format(fh.plot_dir))
+
+
+# clr-clr plots
+
+good_rows = (hopsphot["F70"] > 1.e-4) & (hopsphot["f_F70"] == 1) &\
+            (hopsphot["F100"] > 1.e-4) & (hopsphot["f_F100"] == 1) &\
+            (hopsphot["F160"] > 1.e-4) & (hopsphot["f_F160"] == 1) &\
+            (hopsphot["f_F24"] == 1)
+
+hops_good = hopsphot[good_rows]
+hops_good['clr1'] = np.log10((70. * hops_good["F70"]) / (24. * hops_good["F24"]))
+hops_good['clr2'] = np.log10((160. * hops_good["F160"]) / (100. * hops_good["F100"]))
+
+clrclr_by_region(hops_good[hops_good['cloud'] == 'A'], hops_good['clr1'], hops_good['clr2'],
+                     figname="{}{}OrionA_clrclr.eps".format(top_dir, plot_dir),
+                     hspace=0.05,
+                     color=red, all_color=grey)
+plt.show()
