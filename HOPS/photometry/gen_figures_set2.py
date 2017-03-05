@@ -1,26 +1,5 @@
 
 
-
-def clr_vs_dec(hops_df, style='ticks', filename=None, clrcol='clr1', color="blue"):
-    y_lbl = "<Log$_{10}\ F_{\lambda}\ 70 / F_{\lambda}\ 24$>"
-    if clrcol == 'clr2':
-        "<Log$_{10}\ F_{\lambda}\ 160 / F_{\lambda}\ 100$>"
-    sns.set_style(style)
-    kws2 = {'color': color, 'marker': 'o', 's': 100}
-    grp_df = hops_df.groupby('region')
-    for name, df in grp_df:
-        avg_dec = np.mean(df['Dec'])
-        avg_clr = np.mean(df[clrcol])
-        med_clr = np.median(df[clrcol])
-        sns.regplot(x=avg_dec, y=avg_clr, fit_reg=False, scatter_kws=kws2)
-        plt.text(avg_dec, avg_clr, name, rotation=90)
-    sns.despine()
-    if filename is not None:
-        plt.savefit(filename)
-    return
-
-clr_vs_dec(hops_good, color=fh.red)
-
 indA = np.where(regData["decLow"]<-3.9)
 indB = np.where(regData["decLow"]>=-3.9)
 #

@@ -92,12 +92,14 @@ def stats_by_region(phot_tbl, add_clrs=False):
         y_70 = df[good_70]["F70"]
         good_160 = (df["f_F160"] == 1) & (df["F160"] > 1.e-4)
         y_160 = df[good_160]["F160"]
+        clr1 = clr2 = med_clr1 = med_clr2 = std_clr1 = std_clr2 = None
         if add_clrs is True:
             clr1 = np.mean(df["clr1"])
             clr2 = np.mean(df["clr2"])
-        else:
-            clr1 = 0
-            clr2 = 0
+            med_clr1 = np.median(df["clr1"])
+            med_clr2 = np.median(df["clr2"])
+            std_clr1 = np.std(df["clr1"])
+            std_clr2 = np.std(df["clr2"])
         row = pd.DataFrame({
             "name": name,
             "avg_dec": np.mean(df[good_70]["Dec"]),
@@ -110,7 +112,11 @@ def stats_by_region(phot_tbl, add_clrs=False):
             "med_F160": np.median(y_160),
             "std_F160": np.std(y_160),
             "clr1": clr1,
-            "clr2": clr2
+            "clr2": clr2,
+            "med_clr1": med_clr1,
+            "med_clr2": med_clr2,
+            "std_clr1": std_clr1,
+            "std_clr2": std_clr2
         }, index=[idx])
         res = pd.concat([res, row])
         idx = idx + 1
@@ -150,33 +156,48 @@ def clrclr_by_region(hops_df, figname=None,
 
 # clr vs decLow
 
-def clr_vs_dec(hops_df, filename=None, clrcol='clr1', color="blue",
-               mean_clr=blue, med_clr=red,
-               y_lbl="<Log$_{10}\ F_{\lambda}\ 70 / F_{\lambda}\ 24$>",
-               x_off=None, y_off=None, fc=grey):
-    plt.errorbar(x=hops_df['avg_dec'], y=hops_df[clrcol], yerr='std_{}'.format(clrcol), color=mean_clr)
-    reg_grp = hops_df.groupby('region')
+def plt_vs_dec(hops_stats, filename=None, y=['clr1', 'med_clr1'],
+               color=[blue, red], format=['o', 'o'], errors=True,
+               ylabel="<Log$_{10}\ F_{\lambda}\ 70 / F_{\lambda}\ 24$>",
+               x_off=None, y_off=None,
+               label_bkd=grey, label_size=None,
+               xticks=None, yticks=None,
+               AB_dec_boundary=AB_dec_boundary):
+    if isinstance(y, list):
+        y0 = y[0]
+        ncols = len(y)
+    else:
+        y0 = y
+        ncols = 1
+    # no checking/validation of color and formats against columns supplied
+    # be careful.
+    if errors:
+        plt.errorbar(x=hops_stats['avg_dec'], y=hops_stats[y0], yerr=hops_stats["std_{}".format(y0)], fmt=format[0], color=color[0])
+    else:
+        plt.plot(hops_stats['avg_dec'], hops_stats[y0], format[0], color=color[0])
+    if ncols > 1:
+        for i, icol in enumerate(y[1:]):
+            plt.plot(hops_stats['avg_dec'], hops_stats[icol], format[i + 1], color=color[i + 1])
+    plt.xlabel("<$\delta$> (degrees)")
+    if xticks is not None:
+        plt.xticks(xticks)
+    plt.ylabel(ylabel)
+    if yticks is not None:
+        plt.yticks(yticks)
+    plt.axvline(x=AB_dec_boundary, ymin=0, ymax=1, linestyle='--', color='black')
+    ylow, ytop = plt.ylim()
+    plt.text(-4.1, ylow + 0.05 * (ytop - ylow), 'Orion A', ha='right', va='bottom')
+    plt.text(-3.6, ylow + 0.05 * (ytop - ylow), 'Orion B', ha='left', va='bottom')  # , transform = ax.transAxes)
     if x_off is None:
-        x_off = [0] * len(reg_grp)
+        x_off = np.zeros(hops_stats.shape[0])
     if y_off is None:
         y_off = x_off
-    for tup, dx, dy in zip(reg_grp, x_off, y_off):
-        name = tup[0]
-        df = tup[1]
-        avg_dec = np.mean(df['Dec'])
-        avg_clr = np.mean(df[clrcol])
-        med_clr = np.median(df[clrcol])
-        std_clr = np.std(df[clrcol])
-        plt.errorbar(x=avg_dec, y=avg_clr, yerr=std_clr, color=mean_clr)
-        plt.scatter(x=avg_dec, y=med_clr, color=med_clr)
-        plt.annotate(
-            name,
-            xy=(avg_dec + dx, avg_clr + dy), xytext=(dx, dy), rotation=90,
-            textcoords='offset points', ha='right', va='bottom',
-            bbox=dict(boxstyle='round, pad=0.5', fc=fc, alpha=0.5)
-        )
-    plt.xlabel("<$\delta$>")
-    plt.ylabel(y_lbl)
+    for label, x, y, dx, dy in zip(hops_stats['name'], hops_stats['avg_dec'], hops_stats[y0], x_off, y_off):
+        plt.annotate(label, xy=(x, y), xytext=(x + dx, y + dy),
+                     rotation=90, size=label_size,
+                     textcoords='data', ha='center', va='bottom',
+                     bbox=dict(boxstyle='round, pad=0.5', fc=label_bkd, alpha=0.5))
     if filename is not None:
-        plt.savefit(filename)
+        print("Saved to file {}".format(filename))
+        plt.savefig(filename)
     return
