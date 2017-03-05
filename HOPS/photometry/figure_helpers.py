@@ -7,6 +7,7 @@ import seaborn as sns
 
 # basic pars
 
+AB_dec_boundary = -3.83
 plot_dir = "figures/"
 if not os.path.exists(plot_dir):
     os.mkdir(plot_dir)
@@ -82,7 +83,7 @@ def LF_by_region(phot_tbl, region_df, wlbl, logbins, figname=None,
 
 # Stats by region
 
-def stats_by_region(phot_tbl):
+def stats_by_region(phot_tbl, add_clrs=False):
     hops_grp = phot_tbl.groupby("region")
     res = pd.DataFrame()
     idx = 0
@@ -91,6 +92,12 @@ def stats_by_region(phot_tbl):
         y_70 = df[good_70]["F70"]
         good_160 = (df["f_F160"] == 1) & (df["F160"] > 1.e-4)
         y_160 = df[good_160]["F160"]
+        if add_clrs is True:
+            clr1 = np.mean(df["clr1"])
+            clr2 = np.mean(df["clr2"])
+        else:
+            clr1 = 0
+            clr2 = 0
         row = pd.DataFrame({
             "name": name,
             "avg_dec": np.mean(df[good_70]["Dec"]),
@@ -102,6 +109,8 @@ def stats_by_region(phot_tbl):
             "avg_F160": np.mean(y_160),
             "med_F160": np.median(y_160),
             "std_F160": np.std(y_160),
+            "clr1": clr1,
+            "clr2": clr2
         }, index=[idx])
         res = pd.concat([res, row])
         idx = idx + 1
@@ -110,32 +119,64 @@ def stats_by_region(phot_tbl):
 
 # clrclr plots by region
 
-def clrclr_by_region(hops_df, hopsx, hopsy, figname=None,
+def clrclr_by_region(hops_df, figname=None,
                      xlims=[0.3, 3.7], ylims=[-0.3, 1.0],
                      color="purple", all_color="black", width=6, height=8,
-                     hspace=0.02, wspace=0.02, style="ticks"):
+                     hspace=0, wspace=0):
     grp_df = hops_df.groupby('region')
-    sns.set_style(style)
-    sns.despine()
-    f, pTups = plt.subplots(nrows=len(grp_df.groups.keys()), ncols=1, sharex=True, sharey=True)
+    n_grps = len(grp_df.groups)
+    f, pTups = plt.subplots(nrows=n_grps, ncols=1, sharex=True, sharey=True)
     f.set_figwidth(width)
     f.set_figheight(height)
-    f.subplots_adjust(hspace=hspace)
-    f.subplots_adjust(wspace=wspace)
     kws1 = {'color': all_color, 'marker': '.'}
     kws2 = {'color': color, 'marker': 'o'}
     i = 0
     for name, df in grp_df:
-        sns.regplot(x=hopsx, y=hopsy, ax=pTups[i], fit_reg=False, scatter_kws=kws1)
-        sns.regplot(x=df['clr1'], y=df['clr2'], fit_reg=False, ax=pTups[i], scatter_kws=kws2)
+        pTups[i].scatter(x=hops_df['clr1'], y=hops_df['clr2'], **kws1)
+        pTups[i].scatter(x=df['clr1'], y=df['clr2'], **kws2)
         pTups[i].set_ylabel(" ")
         pTups[i].text(2.8, -0.1, name)
         i = i + 1
     pTups[-1].set_xlabel("Log$_{10}\ \lambda F_{\lambda}\ 70 / \lambda F_{\lambda}\ 24$")
-    pTups[1].set_ylabel("Log$_{10}\ \lambda F_{\lambda}\ 160 /\lambda F_{\lambda}\ 100$")
+    pTups[int(n_grps / 2)].set_ylabel("Log$_{10}\ \lambda F_{\lambda}\ 160 /\lambda F_{\lambda}\ 100$")
     plt.xlim(xlims[0], xlims[1])
     plt.ylim(ylims[0], ylims[1])
+    plt.subplots_adjust(wspace=wspace, hspace=hspace)
     plt.tight_layout()
     if figname is not None:
         plt.savefig(figname)
+    return
+
+
+# clr vs decLow
+
+def clr_vs_dec(hops_df, filename=None, clrcol='clr1', color="blue",
+               mean_clr=blue, med_clr=red,
+               y_lbl="<Log$_{10}\ F_{\lambda}\ 70 / F_{\lambda}\ 24$>",
+               x_off=None, y_off=None, fc=grey):
+    plt.errorbar(x=hops_df['avg_dec'], y=hops_df[clrcol], yerr='std_{}'.format(clrcol), color=mean_clr)
+    reg_grp = hops_df.groupby('region')
+    if x_off is None:
+        x_off = [0] * len(reg_grp)
+    if y_off is None:
+        y_off = x_off
+    for tup, dx, dy in zip(reg_grp, x_off, y_off):
+        name = tup[0]
+        df = tup[1]
+        avg_dec = np.mean(df['Dec'])
+        avg_clr = np.mean(df[clrcol])
+        med_clr = np.median(df[clrcol])
+        std_clr = np.std(df[clrcol])
+        plt.errorbar(x=avg_dec, y=avg_clr, yerr=std_clr, color=mean_clr)
+        plt.scatter(x=avg_dec, y=med_clr, color=med_clr)
+        plt.annotate(
+            name,
+            xy=(avg_dec + dx, avg_clr + dy), xytext=(dx, dy), rotation=90,
+            textcoords='offset points', ha='right', va='bottom',
+            bbox=dict(boxstyle='round, pad=0.5', fc=fc, alpha=0.5)
+        )
+    plt.xlabel("<$\delta$>")
+    plt.ylabel(y_lbl)
+    if filename is not None:
+        plt.savefit(filename)
     return

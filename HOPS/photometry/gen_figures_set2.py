@@ -1,44 +1,4 @@
 
-#
-
-# test, not really any good.
-
-sns.set_style(style)
-sns.despine()
-g = sns.FacetGrid(hops_good[hops_good['cloud'] == 'A'], row="region",
-                  sharex=True, sharey=True, xlim=xlims, ylim=ylims)
-g.map(plt.scatter, "clr1", "clr2", edgecolor="w")
-plt.xlabel("Log$_{10} \lambda F_{\lambda}\ 70 / \lambda F_{\lambda}\ 24$")
-plt.ylabel("Log$_{10} \lambda F_{\lambda}\ 160 /\lambda F_{\lambda}\ 100$")
-plt.xlim(xlims[0], xlims[1])
-plt.ylim(ylims[0], ylims[1])
-plt.show()
-
-
-# Generate color-color plots.
-
-
-
-gen_clrclr_by_region(hops_good[hops_good['cloud'] == 'B'], hops_good['clr1'], hops_good['clr2'],
-                     figname="{}{}OrionB_clrclr.eps".format(top_dir, plot_dir),
-                     hspace=0.05,
-                     color=red, all_color=grey)
-plt.show()
-
-
-#
-# Mean X vs dec.
-
-yr = [0, 4.0]
-reg_order = stat_df['name'][np.argsort(stat_df['avg_dec'])]
-sns.boxplot(data=hops_good, x="region", y="clr1", color=blue, order=reg_order)
-plt.ylabel("<Log$_{10}\ F_{\lambda}\ 70 / F_{\lambda}\ 24$>")
-plt.xlabel("<$\delta$> (degrees)")
-plt.ylim(yr[0], yr[1])
-plt.plot([-3.83, -3.83], yr, 'k--')
-plt.text(-4.1, yr[0]+0.05, 'Orion A', ha='right', va='bottom')
-plt.text(-3.6, yr[0]+0.05, 'Orion B', ha='left', va='bottom')
-plt.show()
 
 
 def clr_vs_dec(hops_df, style='ticks', filename=None, clrcol='clr1', color="blue"):
@@ -51,7 +11,7 @@ def clr_vs_dec(hops_df, style='ticks', filename=None, clrcol='clr1', color="blue
     for name, df in grp_df:
         avg_dec = np.mean(df['Dec'])
         avg_clr = np.mean(df[clrcol])
-        med_clr = np.
+        med_clr = np.median(df[clrcol])
         sns.regplot(x=avg_dec, y=avg_clr, fit_reg=False, scatter_kws=kws2)
         plt.text(avg_dec, avg_clr, name, rotation=90)
     sns.despine()
@@ -59,7 +19,7 @@ def clr_vs_dec(hops_df, style='ticks', filename=None, clrcol='clr1', color="blue
         plt.savefit(filename)
     return
 
-clr_vs_dec(hops_good, color=red)
+clr_vs_dec(hops_good, color=fh.red)
 
 indA = np.where(regData["decLow"]<-3.9)
 indB = np.where(regData["decLow"]>=-3.9)
