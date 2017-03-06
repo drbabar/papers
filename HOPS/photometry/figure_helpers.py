@@ -29,11 +29,11 @@ logbins = np.arange(nbins, dtype=np.float) * bin_step + min_bin
 
 lbl_70um = "70 $\mu$m"
 lbl_160um = "160 $\mu$m"
-lbl_F70um = "$F_{\lambda}\ 70\ $(Jy)"
+lbl_F70um = "$F_{\lambda}70\ $(Jy)"
 lbl_logF70 = "Log$_{10}\ F_{\lambda}70\ $(Jy)"
 lbl_logF160 = "Log$_{10}\ F_{\lambda}160\ $(Jy)"
-lbl_clr1 = "Log$_{10}\ F_{\lambda}\ 70 / F_{\lambda}\ 24$"
-lbl_clr2 = "Log$_{10}\ F_{\lambda}\ 160 / F_{\lambda}\ 100$"
+lbl_clr1 = "Log$_{10}\ F_{\lambda}70 / F_{\lambda}24$"
+lbl_clr2 = "Log$_{10}\ F_{\lambda}160 / F_{\lambda}100$"
 
 # helper functions
 
@@ -51,7 +51,7 @@ def single_LF(y, ax, color=blue, ylim=[0, 39]):
     ax.set_xticks(np.arange(min_bin, max_bin + 0.5, 0.5))
 
 
-def LF_by_region(phot_tbl, region_df, wlbl, logbins, figname=None,
+def LF_by_region(phot_tbl, region_df, wlbl, logbins, filename=None,
                  xlim=[-2.4, 3.4], ylim=[-0.5, 14.5],
                  color="purple", width=6, height=8,
                  hspace=0, wspace=0):
@@ -80,8 +80,8 @@ def LF_by_region(phot_tbl, region_df, wlbl, logbins, figname=None,
     pTups[0, 0].axis("off")
     pTups[1, 0].axis("off")
     plt.tight_layout()
-    if figname is not None:
-        f.savefig(figname, format="eps")
+    if filename is not None:
+        f.savefig(filename, format="eps")
 
 
 # Stats by region
@@ -128,7 +128,7 @@ def stats_by_region(phot_tbl, add_clrs=False):
 
 # clrclr plots by region
 
-def clrclr_by_region(hops_df, figname=None,
+def clrclr_by_region(hops_df, filename=None,
                      xlims=[0.3, 3.7], ylims=[-0.3, 1.0],
                      color="purple", all_color="black", width=6, height=8,
                      hspace=0, wspace=0):
@@ -152,8 +152,8 @@ def clrclr_by_region(hops_df, figname=None,
     plt.ylim(ylims[0], ylims[1])
     plt.subplots_adjust(wspace=wspace, hspace=hspace)
     plt.tight_layout()
-    if figname is not None:
-        plt.savefig(figname)
+    if filename is not None:
+        plt.savefig(filename)
     return
 
 
@@ -204,6 +204,3 @@ def plt_vs_dec(hops_stats, filename=None, y=['clr1', 'med_clr1'],
         print("Saved to file {}".format(filename))
         plt.savefig(filename)
     return
-
-
-# Flux vs clrs plot

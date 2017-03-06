@@ -1,8 +1,9 @@
-\documentclass[manuscript]{aastex}
+\documentclass[manuscript]{aastex61}
 
 %% preprint2 produces a double-column, single-spaced document:
 
 %\documentclass[preprint2]{aastex}
+%\documentclass[manuscript]{aastex61}
 
 %% Sometimes a paper's abstract is too long to fit on the
 %% title page in preprint2 mode. When that is the case,
@@ -26,7 +27,13 @@
 
 %% You can insert a short comment on the title page using the command below.
 
-\slugcomment{To appear in Astrophysical Journal}
+\received{}
+\revised{\today}
+\accepted{}
+
+\submitjournal{ApJ}
+
+%\slugcomment{To appear in Astrophysical Journal}
 
 %% If you wish, you may supply running head information, although
 %% this information may be modified by the editorial offices.
@@ -56,25 +63,24 @@
 %% anywhere in the paper, not just in the front matter.
 %% As in the title, use \\ to force line breaks.
 
-\author{Babar Ali}
-\affil{Space Sciences Institute, Boulder, CO}
+\correspondingauthor{Babar Ali}
 \email{bali67@gmail.com}
 
-\author{William J. Fischer\altaffilmark{a}}
+\author{Babar Ali}
+\affil{Space Sciences Institute, Boulder, CO}
+
+\author{William J. Fischer}
+\altaffiliation{NASA Postdoctoral Program Fellow.}
 \affil{NASA Goddard Space Flight Center, Greenbelt, MD, USA.}
-\email{wjfischer@gmail.com}
 
 \author{S. Thomas Megeath}
 \affil{Ritter Astrophysical Observatory, Department of Physics and Astronomy, University of Toledo, Toledo, OH, USA}
-\email{tommegeath@gmail.com}
 
 \author{Elise Furlan}
 \affil{Infrared Processing and Analysis Center, California Institute of Technology, 770 S. Wilson Ave., Pasadena, CA 91125, USA}
-\email{furlan@ipac.caltech.edu}
 
 \author{Amelia M. Stutz}
 \affil{Max Planck Institute for Astronomy, K\"onigstuhl 17, D-69117 Heidelberg, Germany}
-\email{stutz@mpia.de}
 
 \author{Thomas Stanke}
 \affil{European Southern Observatory, Garching bei Munchen, Germany}
@@ -94,7 +100,7 @@
 \author{T. L. Wilson}
 \affil{Naval Research Laboratory, Washington, DC, USA}
 
-\and
+% \and
 
 \author{Thomas Henning}
 \affil{Max Planck Institute for Astronomy, K\"onigstuhl 17, D-69117 Heidelberg, Germany}
@@ -104,7 +110,6 @@
 %% affiliation information with \altaffiltext, with one command per each
 %% affiliation.
 
-\altaffiltext{a}{NASA Postdoctoral Program Fellow.}
 
 %% Mark off your abstract in the ``abstract'' environment. In the manuscript
 %% style, abstract will output a Received/Accepted line after the
@@ -397,7 +402,7 @@ HIPE is a joint development by the Herschel Science Ground Segment Consortium, c
 
 \begin{figure*}[ht]
 \centering
-\plotone{figures/clr_vs_flimit.png}
+\plotone{figures/clr_vs_flimit.eps}
 \caption{The observed mean color above the simulated completeness limit for LDN~1641.  Solid lines show the mean values for \clra\ (black) and \clrb\ (blue) with limiting flux.  The dashed lines show the mean color for the combined Orion ONC and OMC-2/3 region.  As discussed in text, we note a complete lack of correlation between the completeness limit and mean color for \clrb.  We note a steady increase in the mean \clra as a function of the completeness limit.  However, the average completeness limits require significant differences before the LDN 1641 sub0region can be explained as being similar to Orion OMC-2/3 and the ONC.\label{fig:clr_v_limit}}
 \end{figure*}
 

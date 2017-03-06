@@ -6,9 +6,6 @@ import figure_helpers as fh
 
 
 phot_tbl = dl.data_loader()
-phot_tbl['clr1'] = np.log10((70. * phot_tbl["F70"]) / (24. * phot_tbl["F24"]))
-phot_tbl['clr2'] = np.log10((160. * phot_tbl["F160"]) / (100. * phot_tbl["F100"]))
-
 
 # Total Lum Functions
 #
@@ -38,14 +35,14 @@ with sns.axes_style(fh.style):
     sns.despine()
     fh.LF_by_region(phot_tbl, reg_df, "F70", fh.logbins, color=fh.blue,
                     hspace=0.05, wspace=0.05,
-                    figname="{}LF70_byregion.eps".format(fh.plot_dir))
+                    filename="{}LF70_byregion.eps".format(fh.plot_dir))
     plt.show()
 
 with sns.axes_style(fh.style):
     sns.despine()
     fh.LF_by_region(phot_tbl, reg_df, "F160", fh.logbins, color=fh.red,
                     hspace=0.05, wspace=0.05,
-                    figname="{}LF160_byregion.eps".format(fh.plot_dir))
+                    filename="{}LF160_byregion.eps".format(fh.plot_dir))
     plt.show()
 
 
@@ -85,16 +82,18 @@ hops_good = phot_tbl[good_rows]
 hops_good.loc[:, 'clr1'] = np.log10((70. * hops_good["F70"]) / (24. * hops_good["F24"]))
 hops_good.loc[:, 'clr2'] = np.log10((160. * hops_good["F160"]) / (100. * hops_good["F100"]))
 
-sns.set_context('paper')
-fh.clrclr_by_region(hops_good[hops_good['cloud'] == 'A'],
-                    figname="{}OrionA_clrclr.eps".format(fh.plot_dir),
-                    color=fh.red, all_color=fh.grey)
+with sns.axes_style(fh.style):
+    sns.set_context('paper')
+    fh.clrclr_by_region(hops_good[hops_good['cloud'] == 'A'],
+                        filename="{}OrionA_clrclr.eps".format(fh.plot_dir),
+                        color=fh.red, all_color=fh.grey)
 plt.show()
 
-sns.set_context('paper')
-fh.clrclr_by_region(hops_good[hops_good['cloud'] == 'B'],
-                    figname="{}OrionB_clrclr.eps".format(fh.plot_dir),
-                    color=fh.red, all_color=fh.grey)
+with sns.axes_style(fh.style):
+    sns.set_context('paper')
+    fh.clrclr_by_region(hops_good[hops_good['cloud'] == 'B'],
+                        filename="{}OrionB_clrclr.eps".format(fh.plot_dir),
+                        color=fh.red, all_color=fh.grey)
 plt.show()
 
 
