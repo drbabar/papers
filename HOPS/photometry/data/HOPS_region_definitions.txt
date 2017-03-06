@@ -41,7 +41,7 @@
      name     |  decLow   |  decHigh | refLow      | refHigh |
   LDN 1622    |   1.3     |   2.0833 |  Amy & Will |  Amy   |
   NGC 2068    |  -0.5     |   1.3    |  Amy        |  Amy   |
-  NGC 2023-4  |  -3.83    |  -0.5    |  Amy        |  Amy   |
+  NGC 2023/4  |  -3.83    |  -0.5    |  Amy        |  Amy   |
 #  OMC 2-3     |  -5.25    |  -3.83   |  Will       |  Amy   |
 #  ONC-S       |  -6.50    |  -5.25   |  Amy        |  Will  |
 #  LDN 1641-N  |  -7.25    |  -6.50   |  Will       |  Will  |

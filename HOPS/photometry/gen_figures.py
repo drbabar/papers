@@ -6,6 +6,8 @@ import figure_helpers as fh
 
 
 phot_tbl = dl.data_loader()
+phot_tbl['clr1'] = np.log10((70. * phot_tbl["F70"]) / (24. * phot_tbl["F24"]))
+phot_tbl['clr2'] = np.log10((160. * phot_tbl["F160"]) / (100. * phot_tbl["F100"]))
 
 
 # Total Lum Functions
@@ -111,7 +113,7 @@ with sns.axes_style(fh.style):
     sns.set_context('paper')
     sns.despine()
     plt_vs_dec(hops_stats, y=['clr1', 'med_clr1'], color=[fh.blue, fh.red],
-                  ylabel="<Log$_{10}\ F_{\lambda}\ 70 / F_{\lambda}\ 24$>",
+                  ylabel="<{}>".format(fh.clr1),
                   x_off=x_off, y_off=y_off,
                   xticks=np.arange(-8.5, 2.5, 1),
                   filename="{}clr1_vs_dec.eps".format(fh.plot_dir))
@@ -125,7 +127,7 @@ with sns.axes_style(fh.style):
     sns.set_context('paper')
     sns.despine()
     plt_vs_dec(hops_stats, y=['clr2', 'med_clr2'], color=[fh.blue, fh.red],
-                  ylabel="<Log$_{10}\ F_{\lambda}\ 160 / F_{\lambda}\ 100$>",
+                  ylabel="<{}>".format(fh.clr2),
                   x_off=x_off, y_off=y_off, label_size=8,
                   xticks=np.arange(-8.5, 2.5, 1),
                   filename="{}clr2_vs_dec.eps".format(fh.plot_dir))
@@ -147,4 +149,25 @@ with sns.axes_style(fh.style):
                x_off=x_off, y_off=y_off, label_size=8,
                errors=False,
                filename="{}num_vs_dec.eps".format(fh.plot_dir))
+plt.show()
+
+
+# Flux vs color plots
+
+with sns.axes_style(fh.style):
+    sns.set_context('paper')
+    sns.despine()
+    f, axs = plt.subplots(nrows=1, ncols=2, sharex=False, sharey=True)
+    f.set_figwidth(8)
+    f.set_figheight(6)
+    f.subplots_adjust(hspace=0)
+    f.subplots_adjust(wspace=0)
+    g0 = sns.regplot(y="F70", x="clr1", data=phot_tbl, fit_reg=False, color=fh.blue, ax=axs[0])
+    g0.set_yscale('log')
+    g0.set_xlabel(fh.lbl_clr1)
+    g0.set_ylabel(fh.lbl_F70um)
+    g1 = sns.regplot(y="F70", x="clr2", data=phot_tbl, fit_reg=False, color=fh.red, ax=axs[1])
+    g1.set_xlabel(fh.lbl_clr2)
+    g1.set_ylabel(" ")
+    plt.savefig("{}f70_v_clr2.eps".format(fh.plot_dir))
 plt.show()

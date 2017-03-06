@@ -29,11 +29,14 @@ logbins = np.arange(nbins, dtype=np.float) * bin_step + min_bin
 
 lbl_70um = "70 $\mu$m"
 lbl_160um = "160 $\mu$m"
+lbl_F70um = "$F_{\lambda}\ 70\ $(Jy)"
 lbl_logF70 = "Log$_{10}\ F_{\lambda}70\ $(Jy)"
 lbl_logF160 = "Log$_{10}\ F_{\lambda}160\ $(Jy)"
-
+lbl_clr1 = "Log$_{10}\ F_{\lambda}\ 70 / F_{\lambda}\ 24$"
+lbl_clr2 = "Log$_{10}\ F_{\lambda}\ 160 / F_{\lambda}\ 100$"
 
 # helper functions
+
 
 def data_selector(df, col):
     return (df["f_{}".format(col)] == 1) & (df[col].isnull() == False)
@@ -201,3 +204,6 @@ def plt_vs_dec(hops_stats, filename=None, y=['clr1', 'med_clr1'],
         print("Saved to file {}".format(filename))
         plt.savefig(filename)
     return
+
+
+# Flux vs clrs plot
