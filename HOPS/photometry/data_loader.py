@@ -3,6 +3,30 @@ import pandas as pd
 from astroquery.vizier import Vizier
 
 
+def obsid_reader():
+    obs_tbl = pd.read_csv("data/obsid_table.txt", sep="|")
+    col_ren = {}
+    [col_ren.update({col: col.strip()}) for col in obs_tbl.columns]
+    obs_tbl = obs_tbl.rename(columns=col_ren)
+    hops_dict = {}
+    for idx, row in obs_tbl.iterrows():
+        try:
+            hops_ids = row['hops_ids'].split(",")
+            for hid in [ihid.strip() for ihid in hops_ids]:
+                if hid in hops_dict:
+                    hops_dict.update({hid['group']: "{}, {}".format(hops_dict[hid]['group'], row['group'])})
+                    hops_dict.update({hid['obs_date']: "{}, {}".format(hops_dict[hid]['obs_date'], row['obs_date'].strip())})
+                    hops_dict.update({hid['obsid']: "{}, {}".format(hops_dict[hid]['obsid'], row['obsid'].strip())})
+                else:
+                    hops_dict.update({hid: {
+                        'group': row['group'],
+                        'obs_date': row['obs_date'].strip(),
+                        'obsid': row['obsid'].strip()
+                    }})
+        except:
+            print("idx = {}, row = {}".format(idx, row))
+
+
 def regions():
     reg_df = pd.read_csv("data/HOPS_region_definitions.txt", comment='#', sep="|")
     cols = reg_df.columns
