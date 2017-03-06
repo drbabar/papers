@@ -3,3 +3,8 @@
 **/__pycache__
 **/.DS_Store
 **/._*
+**/*.log
+**/*eps-converted-to.pdf
+**/*.aux
+**/*.synctex.gz
+**/*.bib

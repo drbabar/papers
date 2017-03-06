@@ -50,8 +50,7 @@ def data_loader(photometry_file="data/photometry_table.csv", use_the_force=False
             return pd.read_csv(fname, comment="#", skiprows=1, delim_whitespace=True, header=1)
 
         wm_grid = [tuple([w, m]) for m in ["aper", "PSF"] for w in [160, 70]]
-        # phots = {}
-        # [phots.update({"{}_{}".format(w, m): read_phot_file(w, m)}) for w, m in wm_grid]
+
         phots = [read_phot_file(w, m) for w, m in wm_grid]
         phots_df = phots[0]
         for df in phots[1:]:
@@ -64,6 +63,11 @@ def data_loader(photometry_file="data/photometry_table.csv", use_the_force=False
         meth_df['m_F160'] = ["P" if res == True else "A" for res in abs(meth_df['F160'] - meth_df['P160']) > abs(meth_df['F160'] - meth_df['PSF_160'])]
 
         phot_tbl = pd.merge(phot_tbl, meth_df[["HOPS", "m_F70", "m_F160"]], on="HOPS", how="left")
+
+        # Compute colors
+        phot_tbl['clr1'] = np.log10((70. * phot_tbl["F70"]) / (24. * phot_tbl["F24"]))
+        phot_tbl['clr2'] = np.log10((160. * phot_tbl["F160"]) / (100. * phot_tbl["F100"]))
+
         if verbose:
             print("done.")
         phot_tbl.to_csv(photometry_file)

@@ -1,8 +1,9 @@
-\documentclass[manuscript]{aastex}
+\documentclass[manuscript]{aastex61}
 
 %% preprint2 produces a double-column, single-spaced document:
 
 %\documentclass[preprint2]{aastex}
+%\documentclass[manuscript]{aastex61}
 
 %% Sometimes a paper's abstract is too long to fit on the
 %% title page in preprint2 mode. When that is the case,
@@ -26,7 +27,13 @@
 
 %% You can insert a short comment on the title page using the command below.
 
-\slugcomment{To appear in Astrophysical Journal}
+\received{}
+\revised{\today}
+\accepted{}
+
+\submitjournal{ApJ}
+
+%\slugcomment{To appear in Astrophysical Journal}
 
 %% If you wish, you may supply running head information, although
 %% this information may be modified by the editorial offices.
@@ -56,25 +63,24 @@
 %% anywhere in the paper, not just in the front matter.
 %% As in the title, use \\ to force line breaks.
 
-\author{Babar Ali}
-\affil{Space Sciences Institute, Boulder, CO}
+\correspondingauthor{Babar Ali}
 \email{bali67@gmail.com}
 
-\author{William J. Fischer\altaffilmark{a}}
+\author{Babar Ali}
+\affil{Space Sciences Institute, Boulder, CO}
+
+\author{William J. Fischer}
+\altaffiliation{NASA Postdoctoral Program Fellow.}
 \affil{NASA Goddard Space Flight Center, Greenbelt, MD, USA.}
-\email{wjfischer@gmail.com}
 
 \author{S. Thomas Megeath}
 \affil{Ritter Astrophysical Observatory, Department of Physics and Astronomy, University of Toledo, Toledo, OH, USA}
-\email{tommegeath@gmail.com}
 
 \author{Elise Furlan}
 \affil{Infrared Processing and Analysis Center, California Institute of Technology, 770 S. Wilson Ave., Pasadena, CA 91125, USA}
-\email{furlan@ipac.caltech.edu}
 
 \author{Amelia M. Stutz}
 \affil{Max Planck Institute for Astronomy, K\"onigstuhl 17, D-69117 Heidelberg, Germany}
-\email{stutz@mpia.de}
 
 \author{Thomas Stanke}
 \affil{European Southern Observatory, Garching bei Munchen, Germany}
@@ -94,7 +100,7 @@
 \author{T. L. Wilson}
 \affil{Naval Research Laboratory, Washington, DC, USA}
 
-\and
+% \and
 
 \author{Thomas Henning}
 \affil{Max Planck Institute for Astronomy, K\"onigstuhl 17, D-69117 Heidelberg, Germany}
@@ -104,7 +110,6 @@
 %% affiliation information with \altaffiltext, with one command per each
 %% affiliation.
 
-\altaffiltext{a}{NASA Postdoctoral Program Fellow.}
 
 %% Mark off your abstract in the ``abstract'' environment. In the manuscript
 %% style, abstract will output a Received/Accepted line after the
@@ -317,13 +322,13 @@ HIPE is a joint development by the Herschel Science Ground Segment Consortium, c
 
 \begin{figure*}[ht]
 \centering
-\includegraphics[height=5in]{LFs.eps}
+\includegraphics[height=5in]{figures/LFs.eps}
 \caption{Flux distributions at 70~\micron\ (top, blue) and 160~\micron\ (bottom, red) for all sources in the HOPS sample.  The upper limits are not used to calculate the distribution.\label{fig:fd}}
 \end{figure*}
 
 \begin{figure*}[ht]
 \centering
-\includegraphics[height=7in]{LF70_byregion.eps}
+\includegraphics[height=7in]{figures/LF70_byregion.eps}
 \caption{The 70\micron\ flux distributions segregated by sub-region for Orion B (left column) and Orion A (right column).\label{fig:fd70regional}}
 \end{figure*}
 
@@ -331,7 +336,7 @@ HIPE is a joint development by the Herschel Science Ground Segment Consortium, c
 
 \begin{figure*}[ht]
 \centering
-\includegraphics[height=7in]{LF160_byregion.eps}
+\includegraphics[height=7in]{figures/LF160_byregion.eps}
 \caption{The 160\micron\ flux distributions segregated by subregion for Orion B (left column) and Orion A (right column).\label{fig:fd160regional}}
 \end{figure*}
 
@@ -339,7 +344,7 @@ HIPE is a joint development by the Herschel Science Ground Segment Consortium, c
 
 \begin{figure*}[ht]
 \centering
-\plotone{Figures/mdFlux_v_dec.eps}
+\plotone{figures/mdFlux_v_dec.eps}
 \caption{Median flux as a function of declination for the 70~\micron\ FD (blue dots and curve) and the 160~\micron\ FD (red dots and curve).\label{fig:mdFlux_v_dec}}
 \end{figure*}
 
@@ -347,7 +352,7 @@ HIPE is a joint development by the Herschel Science Ground Segment Consortium, c
 
 \begin{figure*}[ht]
 \centering
-\plotone{Figures/OrionA_clrclr.eps}
+\plotone{figures/OrionA_clrclr.eps}
 \caption{The observed distribution of colors in Orion~A segregated by sub-regions.  The sub-region is identified in the respective panel.  Solid red symbols show the colors for the sub-region.  Smaller black open symbols show the distribution for all sources in the combine Orion~A and Orion~B samples.\label{fig:clrclr1}}
 \end{figure*}
 
@@ -355,7 +360,7 @@ HIPE is a joint development by the Herschel Science Ground Segment Consortium, c
 
 \begin{figure*}[ht]
 \centering
-\plotone{Figures/OrionB_clrclr.png}
+\plotone{figures/OrionB_clrclr.eps}
 \caption{Same as Figure~\ref{fig:clrclr1} for Orion~B.\label{fig:clrclr2}}
 \end{figure*}
 
@@ -364,7 +369,7 @@ HIPE is a joint development by the Herschel Science Ground Segment Consortium, c
 %7
 \begin{figure*}[ht]
 \centering
-\plotone{Figures/clr1_vs_dec.png}
+\plotone{figures/clr1_vs_dec.eps}
 \caption{The mean (black circles) and median (red circles) value of \clra\ color as a function of declination.  The associated sub-region is labelled above the data points themselves.  The vertical bars show the respective standard deviation.  \label{fig:clr1_v_dec}}
 \end{figure*}
 
@@ -373,7 +378,7 @@ HIPE is a joint development by the Herschel Science Ground Segment Consortium, c
 %8
 \begin{figure*}[ht]
 \centering
-\plotone{Figures/clr2_vs_dec.png}
+\plotone{figures/clr2_vs_dec.eps}
 \caption{Same as Figure~\ref{fig:clr1_v_dec} for the \clrb\ color.  \label{fig:clr2_v_dec}}
 \end{figure*}
 
@@ -381,7 +386,7 @@ HIPE is a joint development by the Herschel Science Ground Segment Consortium, c
 
 \begin{figure*}[ht]
 \centering
-\plotone{Figures/num_vs_dec.png}
+\plotone{figures/num_vs_dec.eps}
 \caption{Number of protostars as a function of sub-region in Orion.\label{fig:num_v_dec}}
 \end{figure*}
 
@@ -389,7 +394,7 @@ HIPE is a joint development by the Herschel Science Ground Segment Consortium, c
 
 \begin{figure*}[ht]
 \centering
-\plottwo{Figures/f70_v_clr1.png}{Figures/f70_v_clr2.png}
+\plotone{figures/f70_v_clr2.eps}
 \caption{The observed 70~\micron\ flux as a function of the \clra\ (left) and \clrb\ (right) flux ratios.\label{fig:clrflux}}
 \end{figure*}
 
@@ -397,7 +402,7 @@ HIPE is a joint development by the Herschel Science Ground Segment Consortium, c
 
 \begin{figure*}[ht]
 \centering
-\plotone{Figures/clr_vs_flimit.png}
+\plotone{figures/clr_vs_flimit.eps}
 \caption{The observed mean color above the simulated completeness limit for LDN~1641.  Solid lines show the mean values for \clra\ (black) and \clrb\ (blue) with limiting flux.  The dashed lines show the mean color for the combined Orion ONC and OMC-2/3 region.  As discussed in text, we note a complete lack of correlation between the completeness limit and mean color for \clrb.  We note a steady increase in the mean \clra as a function of the completeness limit.  However, the average completeness limits require significant differences before the LDN 1641 sub0region can be explained as being similar to Orion OMC-2/3 and the ONC.\label{fig:clr_v_limit}}
 \end{figure*}
 
