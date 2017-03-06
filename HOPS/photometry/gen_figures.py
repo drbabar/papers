@@ -64,14 +64,14 @@ y_off[6] = +12
 y_off[7] = 5
 with sns.axes_style(fh.style):
     sns.despine()
-    plt_vs_dec(stat_df, y=['med_F70', 'med_F70', 'med_F160', 'med_F160'],
-               color=[fh.blue, fh.blue, fh.red, fh.red],
-               format=['o', '-', 'o', '-'],
-               ylabel="Median $F_{\lambda}$ (Jy)",
-               x_off=x_off, y_off=y_off,
-               xticks=np.arange(-8.5, 2.5, 1),
-               errors=False,
-               filename="{}mdFlux_v_dec.eps".format(fh.plot_dir))
+    fh.plt_vs_dec(stat_df, y=['med_F70', 'med_F70', 'med_F160', 'med_F160'],
+                  color=[fh.blue, fh.blue, fh.red, fh.red],
+                  format=['o', '-', 'o', '-'],
+                  ylabel="Median $F_{\lambda}$ (Jy)",
+                  x_off=x_off, y_off=y_off,
+                  xticks=np.arange(-8.5, 2.5, 1),
+                  errors=False,
+                  filename="{}mdFlux_v_dec.eps".format(fh.plot_dir))
 plt.show()
 
 # clr-clr plots
@@ -112,8 +112,8 @@ x_off[6] = 0.5
 with sns.axes_style(fh.style):
     sns.set_context('paper')
     sns.despine()
-    plt_vs_dec(hops_stats, y=['clr1', 'med_clr1'], color=[fh.blue, fh.red],
-                  ylabel="<{}>".format(fh.clr1),
+    fh.plt_vs_dec(hops_stats, y=['clr1', 'med_clr1'], color=[fh.blue, fh.red],
+                  ylabel="<{}>".format(fh.lbl_clr1),
                   x_off=x_off, y_off=y_off,
                   xticks=np.arange(-8.5, 2.5, 1),
                   filename="{}clr1_vs_dec.eps".format(fh.plot_dir))
@@ -126,8 +126,8 @@ x_off = x_off + 0.4
 with sns.axes_style(fh.style):
     sns.set_context('paper')
     sns.despine()
-    plt_vs_dec(hops_stats, y=['clr2', 'med_clr2'], color=[fh.blue, fh.red],
-                  ylabel="<{}>".format(fh.clr2),
+    fh.plt_vs_dec(hops_stats, y=['clr2', 'med_clr2'], color=[fh.blue, fh.red],
+                  ylabel="<{}>".format(fh.lbl_clr2),
                   x_off=x_off, y_off=y_off, label_size=8,
                   xticks=np.arange(-8.5, 2.5, 1),
                   filename="{}clr2_vs_dec.eps".format(fh.plot_dir))
@@ -142,13 +142,13 @@ y_off[0] = y_off[0] - 20
 with sns.axes_style(fh.style):
     sns.set_context('paper')
     sns.despine()
-    plt_vs_dec(stat_df, y=["n_F70", "n_F70"],
-               color=[fh.blue, fh.blue], format=['o', '-'],
-               ylabel="Number of Protostars at {}".format(fh.lbl_70um),
-               xticks=np.arange(-8.5, 2.5, 1),
-               x_off=x_off, y_off=y_off, label_size=8,
-               errors=False,
-               filename="{}num_vs_dec.eps".format(fh.plot_dir))
+    fh.plt_vs_dec(stat_df, y=["n_F70", "n_F70"],
+                  color=[fh.blue, fh.blue], format=['o', '-'],
+                  ylabel="Number of Protostars at {}".format(fh.lbl_70um),
+                  xticks=np.arange(-8.5, 2.5, 1),
+                  x_off=x_off, y_off=y_off, label_size=8,
+                  errors=False,
+                  filename="{}num_vs_dec.eps".format(fh.plot_dir))
 plt.show()
 
 
