@@ -3,6 +3,37 @@ import pandas as pd
 from astroquery.vizier import Vizier
 
 
+def obsid_reader():
+    obs_tbl = pd.read_csv("data/obsid_table.txt", sep=";")
+    col_ren = {}
+    [col_ren.update({col: col.strip()}) for col in obs_tbl.columns]
+    obs_tbl = obs_tbl.rename(columns=col_ren)
+    obs_df = pd.DataFrame()
+    for idx, row in obs_tbl.iterrows():
+        hops_ids = row['hops_ids'].split(",")
+        for hid in [ihid.strip() for ihid in hops_ids]:
+            hops_row = pd.DataFrame(data={
+                'HOPS': int(hid),
+                'group': row['group'],
+                'obsids': row['obsids'].strip(),
+                'obs_date': row['obs_date'].strip()
+            }, index=[idx])
+            obs_df = pd.concat([obs_df, hops_row])
+    obs_df = obs_df.sort_values(by='HOPS').reset_index()
+    return obs_df.drop(['index'], axis=1)
+
+
+def obsid_from_old_table():
+    obs_tbl = pd.read_csv("observation_table_old.tex", sep="&", comment="\\", header=None)
+    col_ren = {0: 'HOPS', 1: 'RA', 2: 'Dec', 3: 'obsids', 4: 'group', 11: 'region_old', 12: 'obs_date'}
+    obs_tbl = obs_tbl.rename(columns=col_ren)
+    obs_tbl['HOPS'] = obs_tbl['HOPS'].astype(int)
+    obs_tbl['group'] = obs_tbl['group'].astype(int)
+    for icol in ['obsids', 'region_old', 'obs_date']:
+        obs_tbl[icol] = obs_tbl[icol].apply(lambda x: x.strip())
+    return obs_tbl[['HOPS', 'group', 'obsids', 'region_old', 'obs_date']]
+
+
 def regions():
     reg_df = pd.read_csv("data/HOPS_region_definitions.txt", comment='#', sep="|")
     cols = reg_df.columns
