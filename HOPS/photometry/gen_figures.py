@@ -5,7 +5,7 @@ import data_loader as dl
 import figure_helpers as fh
 
 
-phot_tbl = dl.data_loader()
+phot_tbl = dl.data_loader(verbose=False)
 
 # Total Lum Functions
 #
