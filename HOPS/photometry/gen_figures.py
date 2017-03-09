@@ -12,7 +12,6 @@ phot_tbl = dl.data_loader(verbose=False)
 y70 = np.log10(phot_tbl[fh.data_selector(phot_tbl, "F70")]["F70"])
 y160 = np.log10(phot_tbl[fh.data_selector(phot_tbl, "F160")]["F160"])
 with sns.axes_style(fh.style):
-    sns.despine()
     f, (p1, p2) = plt.subplots(2, sharex=True, sharey=True)
     fh.single_LF(y70, p1, color=fh.blue, ylim=[0, 39])
     fh.single_LF(y160, p2, color=fh.red, ylim=[0, 39])
@@ -23,8 +22,9 @@ with sns.axes_style(fh.style):
     p1.set_ylabel("Number")
     p2.set_ylabel("Number")
     plt.tight_layout()
+    sns.despine()
     plt.savefig("{}LFs.eps".format(fh.plot_dir))
-    plt.show()
+plt.show()
 
 
 # LFs by region
@@ -36,14 +36,14 @@ with sns.axes_style(fh.style):
     fh.LF_by_region(phot_tbl, reg_df, "F70", fh.logbins, color=fh.blue,
                     hspace=0.05, wspace=0.05,
                     filename="{}LF70_byregion.eps".format(fh.plot_dir))
-    plt.show()
+plt.show()
 
 with sns.axes_style(fh.style):
-    sns.despine()
     fh.LF_by_region(phot_tbl, reg_df, "F160", fh.logbins, color=fh.red,
                     hspace=0.05, wspace=0.05,
                     filename="{}LF160_byregion.eps".format(fh.plot_dir))
-    plt.show()
+    sns.despine()
+plt.show()
 
 
 # Flux vs declination
@@ -60,7 +60,6 @@ y_off[5] = +13
 y_off[6] = +12
 y_off[7] = 5
 with sns.axes_style(fh.style):
-    sns.despine()
     fh.plt_vs_dec(stat_df, y=['med_F70', 'med_F70', 'med_F160', 'med_F160'],
                   color=[fh.blue, fh.blue, fh.red, fh.red],
                   format=['o', '-', 'o', '-'],
@@ -69,7 +68,9 @@ with sns.axes_style(fh.style):
                   xticks=np.arange(-8.5, 2.5, 1),
                   errors=False,
                   filename="{}mdFlux_v_dec.eps".format(fh.plot_dir))
+    sns.despine()
 plt.show()
+
 
 # clr-clr plots
 
@@ -110,12 +111,12 @@ y_off[6] = 0
 x_off[6] = 0.5
 with sns.axes_style(fh.style):
     sns.set_context('paper')
-    sns.despine()
     fh.plt_vs_dec(hops_stats, y=['clr1', 'med_clr1'], color=[fh.blue, fh.red],
                   ylabel="<{}>".format(fh.lbl_clr1),
                   x_off=x_off, y_off=y_off,
                   xticks=np.arange(-8.5, 2.5, 1),
                   filename="{}clr1_vs_dec.eps".format(fh.plot_dir))
+    sns.despine()
 plt.show()
 
 
@@ -124,12 +125,12 @@ y_off = x_off
 x_off = x_off + 0.4
 with sns.axes_style(fh.style):
     sns.set_context('paper')
-    sns.despine()
     fh.plt_vs_dec(hops_stats, y=['clr2', 'med_clr2'], color=[fh.blue, fh.red],
                   ylabel="<{}>".format(fh.lbl_clr2),
                   x_off=x_off, y_off=y_off, label_size=8,
                   xticks=np.arange(-8.5, 2.5, 1),
                   filename="{}clr2_vs_dec.eps".format(fh.plot_dir))
+    sns.despine()
 plt.show()
 
 
@@ -140,7 +141,6 @@ y_off = x_off + 3
 y_off[0] = y_off[0] - 20
 with sns.axes_style(fh.style):
     sns.set_context('paper')
-    sns.despine()
     fh.plt_vs_dec(stat_df, y=["n_F70", "n_F70"],
                   color=[fh.blue, fh.blue], format=['o', '-'],
                   ylabel="Number of Protostars at {}".format(fh.lbl_70um),
@@ -148,6 +148,7 @@ with sns.axes_style(fh.style):
                   x_off=x_off, y_off=y_off, label_size=8,
                   errors=False,
                   filename="{}num_vs_dec.eps".format(fh.plot_dir))
+    sns.despine()
 plt.show()
 
 
@@ -155,7 +156,6 @@ plt.show()
 
 with sns.axes_style(fh.style):
     sns.set_context('paper')
-    sns.despine()
     f, axs = plt.subplots(nrows=1, ncols=2, sharex=False, sharey=True)
     f.set_figwidth(8)
     f.set_figheight(6)
@@ -169,4 +169,5 @@ with sns.axes_style(fh.style):
     g1.set_xlabel(fh.lbl_clr2)
     g1.set_ylabel(" ")
     plt.savefig("{}f70_v_clr2.eps".format(fh.plot_dir))
+    sns.despine()
 plt.show()
