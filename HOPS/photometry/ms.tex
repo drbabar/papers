@@ -252,7 +252,7 @@ The 160~\micron\ FDs suggest a trend of increasingly bright sources towards lowe
 \subsection{Flux ratio distribution}
 \label{sec:fratio}
 \par
-Flux ratios (colors) are better suited for determining differences as a function of source type than the flux itself because flux ratios depend on the shape of the source SED \citep{ali}. We investigated two different flux ratios using the combined Spitzer, HOPS and Gould-Belt photometry: \clra, and \clrb. Figures~\ref{fig:clrclr1}~\&~\ref{fig:clrclr2} show the flux-ratio vs flux-ratio plots segregated by sub-region for Orion A and Orion B. We do not include data with upper limits for these plots (sources with flag value = 2 in Table~\ref{tbl:obs}). The red symbols show the colors for the sub-region identified in the sub-panel, and the black symbols show the colors for the entire sample. As with the median of the FD, we note an apparent systematic change in the observed flux ratios relative to the entire population in both Orion~A and Orion~B.
+Flux ratios (colors) are better suited for determining differences as a function of source type than the flux itself because flux ratios depend on the shape of the source SED \citep{ali}. We investigated two different flux ratios using the combined Spitzer, HOPS and Gould-Belt photometry: \clra, and \clrb. Figure~\ref{fig:clrclr} shows the flux-ratio vs flux-ratio plots segregated by sub-region for Orion A and Orion B. We do not include data with upper limits for these plots (sources with flag value = 2 in Table~\ref{tbl:obs}). The red symbols show the colors for the sub-region identified in the sub-panel, and the black symbols show the colors for the entire sample. As with the median of the FD, we note an apparent systematic change in the observed flux ratios relative to the entire population in both Orion~A and Orion~B.
 \par
 We quantitatively explore this apparent trend further in Figures~\ref{fig:clr1_v_dec}~\&~\ref{fig:clr2_v_dec}. These Figures show the mean and median colors for each of the sub-regions as a function of the mean declination for all sources belonging to the respective sub-region.  Since the sub-regions are vertically segregated in both the Orion~A and B clouds, declination is a useful proxy for sub-region.
 \par
@@ -270,13 +270,13 @@ The results presented in Section~\ref{sec-results} show the global properties of
 \subsection{Completeness limit bias}
 \label{sec:compbias}
 \par
-Completeness limits are difficult to estimate accurately.  The detection efficiency is a strong function of the magnitude of the local nebular emission;  Hence, we expect the limits to vary considerably even within a single sub-region as the nebular emission itself varies inside any of our adopted sub-region boundaries.  This variation makes it difficult to disentangle observational bias from any real trends shown in Figures~\ref{fig:mdFlux_v_dec},~\ref{fig:clrclr1},~\&~\ref{fig:clrclr2}.
+Completeness limits are difficult to estimate accurately.  The detection efficiency is a strong function of the magnitude of the local nebular emission;  Hence, we expect the limits to vary considerably even within a single sub-region as the nebular emission itself varies inside any of our adopted sub-region boundaries.  This variation makes it difficult to disentangle observational bias from any real trends shown in Figures~\ref{fig:mdFlux_v_dec},~\&~\ref{fig:clrclr}.
 \par
-Fortunately, there is a way to decouple detection bias.   Differences in completeness limit will affect the median flux distribution (Figure~\ref{fig:mdFlux_v_dec}), since such differences will bias the median calculation.  For the same effect to exist also in the flux ratio correlation (Figures~\ref{fig:clrclr1}~\&~\ref{fig:clrclr2}) requires that the observed flux be correlated with flux ratio.  We investigate this possibility by directly examining  the data for such a correlation, and via a simple simulation described below.
+Fortunately, there is a way to decouple detection bias.   Differences in completeness limit will affect the median flux distribution (Figure~\ref{fig:mdFlux_v_dec}), since such differences will bias the median calculation.  For the same effect to exist also in the flux ratio correlation (Figure~\ref{fig:clrclr}) requires that the observed flux be correlated with flux ratio.  We investigate this possibility by directly examining  the data for such a correlation, and via a simple simulation described below.
 \par
 Figure~\ref{fig:clrflux} shows the observed 70~\micron\ flux as a function of the flux ratios used in our investigation.  We note a marginal dependence of 70~\micron\ flux with the \clra\ color, and no obvious correlation with \clrb.  The first trend is not surprising because the protostar flux is dominated by the envelope whose SED peaks near 70~\micron.  Indeed, 70~\micron\ flux changes likely track changes in the amount of material present in the envelope.  In addition, material deeper inside the envelope (closer to the protostar) will be warmer and, hence, will emit more brightly at 70~\micron\ than at 100~\micron\ or 160~\micron.  Therefore, we expect to notice the equivalent of a hotter black body with lesser envelope material.  The \clrb\ color samples the Rayleigh-Jeans side of the SED peak and should show only marginal variation with changing temperature.  On the other hand, the \clra\ color samples the Wien side of the SED and is more likely to show some variation.  Following this reasoning, we understand the loose correlation seen only  between 70~\micron\ flux and \clra\ in Figure~\ref{fig:clrflux}.
 \par
-We can now further investigate completeness limit and observational bias via a simple simulation.  The LDN 1641 sub-regions contain the largest number of protostars (see Table~\ref{tbl:regions}) and visual inspection shows the least contamination of the sample from extended nebulosity. Further, fainter protostars are detected in LDN 1641 than in Orion OMC 2/3. Hence, if bright, complex, spatially extended emission from the local dust is responsible for decreased reliability and higher completeness limits for point source photometry, then LDN 1641 provides an ideal contrast to the Orion OMC 2/3 sub-region. The contrast between LDN~1641 and Orion OMC-2/3 is at the extreme ends of the spatial correlation observed in Figures~\ref{fig:mdFlux_v_dec}$-$~\ref{fig:clrclr2}.
+We can now further investigate completeness limit and observational bias via a simple simulation.  The LDN 1641 sub-regions contain the largest number of protostars (see Table~\ref{tbl:regions}) and visual inspection shows the least contamination of the sample from extended nebulosity. Further, fainter protostars are detected in LDN 1641 than in Orion OMC 2/3. Hence, if bright, complex, spatially extended emission from the local dust is responsible for decreased reliability and higher completeness limits for point source photometry, then LDN 1641 provides an ideal contrast to the Orion OMC 2/3 sub-region. The contrast between LDN~1641 and Orion OMC-2/3 is at the extreme ends of the spatial correlation observed in Figures~\ref{fig:mdFlux_v_dec}$-$~\ref{fig:clrclr}.
 \par
 We can simulate the bias introduced by completeness limit for OMC-2/3 by restricting the observed fluxes in LDN~1641 to only those protostars that are above a simulated completeness limit and recomputing statistical averages. We require that the population of protostars be fundamentally the same between OMC-2/3 and LDN~1641. If this assumption is not valid, then actual population differences must exist between the two sub-regions. (This scenario is discussed below in Section~\ref{sec:popdiff}).  We then re-calculate the mean color of LDN~1641 from the restricted sample. Figure~\ref{fig:clr_v_limit} shows the result of our simulation on a plot of median flux ratio vs the completeness limit for LDN~1641 (solid line) and Orion~OMC-2/3 region (dashed line). The top panel shows the results for median \clra, and the bottom panel for median \clrb.
 \par
@@ -325,7 +325,7 @@ HIPE is a joint development by the Herschel Science Ground Segment Consortium, c
 \begin{figure*}[ht]
 \centering
 \includegraphics[height=7in]{figures/LF70_byregion.eps}
-\caption{The 70\micron\ flux distributions segregated by sub-region for Orion B (left column) and Orion A (right column).\label{fig:fd70regional}}
+\caption{The 70~\micron\ flux distributions segregated by sub-region for Orion B (left column) and Orion A (right column).\label{fig:fd70regional}}
 \end{figure*}
 
 \clearpage
@@ -333,7 +333,7 @@ HIPE is a joint development by the Herschel Science Ground Segment Consortium, c
 \begin{figure*}[ht]
 \centering
 \includegraphics[height=7in]{figures/LF160_byregion.eps}
-\caption{The 160\micron\ flux distributions segregated by subregion for Orion B (left column) and Orion A (right column).\label{fig:fd160regional}}
+\caption{The 160~\micron\ flux distributions segregated by subregion for Orion B (left column) and Orion A (right column).\label{fig:fd160regional}}
 \end{figure*}
 
 \clearpage
@@ -348,19 +348,27 @@ HIPE is a joint development by the Herschel Science Ground Segment Consortium, c
 
 \begin{figure*}[ht]
 \centering
-\plotone{figures/OrionA_clrclr.eps}
-\caption{The observed distribution of colors in Orion~A segregated by sub-regions.  The sub-region is identified in the respective panel.  Solid red symbols show the colors for the sub-region.  Smaller black open symbols show the distribution for all sources in the combine Orion~A and Orion~B samples.\label{fig:clrclr1}}
+\plotone{figures/clrclr.eps}
+\caption{The observed distribution of colors in Orion~A (right panel) and Orion~B (left panel) segregated by sub-regions.  The sub-region is identified in each respective panel.  Solid red symbols show the colors for the sub-region.  Smaller black open symbols show the distribution for all sources in the combined Orion~A and Orion~B samples. \label{fig:clrclr}}
 \end{figure*}
 
 \clearpage
 
-\begin{figure*}[ht]
-\centering
-\plotone{figures/OrionB_clrclr.eps}
-\caption{Same as Figure~\ref{fig:clrclr1} for Orion~B.\label{fig:clrclr2}}
-\end{figure*}
-
-\clearpage
+%\begin{figure*}[ht]
+%\centering
+%\plotone{figures/OrionA_clrclr.eps}
+%\caption{The observed distribution of colors in Orion~A segregated by sub-regions.  The sub-region is identified in the respective panel.  Solid red symbols show the colors for the sub-region.  Smaller black open symbols show the distribution for all sources in the combine Orion~A and Orion~B samples.\label{fig:clrclr1}}
+%\end{figure*}
+%
+%\clearpage
+%
+%\begin{figure*}[ht]
+%\centering
+%\plotone{figures/OrionB_clrclr.eps}
+%\caption{Same as Figure~\ref{fig:clrclr1} for Orion~B.\label{fig:clrclr2}}
+%\end{figure*}
+%
+%\clearpage
 
 %7
 \begin{figure*}[ht]

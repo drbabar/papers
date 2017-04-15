@@ -18,9 +18,9 @@ style = "ticks"
 
 # LF pars
 
-min_bin = -2.4
-max_bin = +3.4
-bin_step = 0.2
+min_bin = -2.5
+max_bin = +3.5
+bin_step = 0.5
 nbins = int((max_bin - min_bin) / bin_step) + 1
 logbins = np.arange(nbins, dtype=np.float) * bin_step + min_bin
 
@@ -52,9 +52,8 @@ def single_LF(y, ax, color=blue, ylim=[0, 39]):
 
 
 def LF_by_region(phot_tbl, region_df, wlbl, logbins, filename=None,
-                 xlim=[-2.4, 3.4], ylim=[-0.5, 14.5],
-                 color="purple", width=6, height=8,
-                 hspace=0, wspace=0):
+                 xlim=None, ylim=None, color="purple", width=6, height=8,
+                 hspace=0, wspace=0, show_all_panels=True):
     # assign the subplot number
     # spi = [1, 3, 5, 2, 4, 6, 8, 10]
     rI = [2, 3, 4, 0, 1, 2, 3, 4]
@@ -65,8 +64,10 @@ def LF_by_region(phot_tbl, region_df, wlbl, logbins, filename=None,
     f.set_figheight(height)
     f.subplots_adjust(hspace=hspace)
     f.subplots_adjust(wspace=wspace)
-    pTups[0][0].set_xlim(xlim[0], xlim[1])
-    pTups[0][0].set_ylim(ylim[0], ylim[1])
+    if xlim is not None:
+        pTups[0][0].set_xlim(xlim[0], xlim[1])
+    if ylim is not None:
+        pTups[0][0].set_ylim(ylim[0], ylim[1])
     pTups[2][0].set_ylabel("Number")
     pTups[4][0].set_xlabel("Log$_{10}\ F_{\lambda}\ $" + wlbl.replace("F", "") + "$\mu$m (Jy)")
     pTups[4][1].set_xlabel("Log$_{10}\ F_{\lambda}\ $" + wlbl.replace("F", "") + "$\mu$m (Jy)")
@@ -77,6 +78,116 @@ def LF_by_region(phot_tbl, region_df, wlbl, logbins, filename=None,
         y = np.log10(phot_tbl[wlbl][index])
         sns.distplot(y, logbins, color=color, kde=False, axlabel=False, ax=p)
         p.text(3, 12, regname, fontsize=10, horizontalalignment='right')
+    if show_all_panels:
+        orionA = (phot_tbl["f_" + wlbl] == 1) & (phot_tbl[wlbl] > 1.e-4) & (phot_tbl['cloud'] == 'A')
+        y = np.log10(phot_tbl[orionA][wlbl])
+        sns.distplot(y, logbins, color=color, kde=False, axlabel=False, ax=pTups[0][0])
+        pTups[0][0].text(3, 12, "Orion A", fontsize=10, horizontalalignment='right')
+        orionB = (phot_tbl["f_" + wlbl] == 1) & (phot_tbl[wlbl] > 1.e-4) & (phot_tbl['cloud'] == 'B')
+        y = np.log10(phot_tbl[orionB][wlbl])
+        sns.distplot(y, logbins, color=color, kde=False, axlabel=False, ax=pTups[1][0])
+        pTups[1][0].text(3, 13, "Orion B", fontsize=10, horizontalalignment='right')
+    else:
+        pTups[0, 0].axis("off")
+        pTups[1, 0].axis("off")
+    plt.tight_layout()
+    if filename is not None:
+        f.savefig(filename, format="eps")
+
+
+def set_cloud_order():
+    return {
+        'A': {
+            'col': 1,
+            'reg': [
+                {'name': 'OMC 2-3', 'row': 0},
+                {'name': 'ONC-S', 'row': 1},
+                {'name': 'LDN 1641-N', 'row': 2},
+                {'name': 'LDN 1641-C', 'row': 3},
+                {'name': 'LDN 1641-S', 'row': 4}
+            ]
+        },
+        'B': {
+            'col': 0,
+            'reg': [
+                {'name': 'NGC 2023/4', 'row': 2},
+                {'name': 'NGC 2068', 'row': 3},
+                {'name': 'LDN 1622', 'row': 4}
+            ]
+        }
+    }
+
+
+def set_figure_layout(hspace=0, wspace=0, width=6, height=8, xlim=None, ylim=None):
+    f, pTups = plt.subplots(nrows=5, ncols=2, sharex=True, sharey=True)
+    f.set_figwidth(width)
+    f.set_figheight(height)
+    f.subplots_adjust(hspace=hspace)
+    f.subplots_adjust(wspace=wspace)
+    if xlim is not None:
+        pTups[0][0].set_xlim(xlim[0], xlim[1])
+    if ylim is not None:
+        pTups[0][0].set_ylim(ylim[0], ylim[1])
+    return f, pTups
+
+
+def two_panel_hist_by_region(df, wlbl, logbins, filename=None,
+                             color="red",
+                             xlim=None, ylim=None,
+                             width=6, height=8,
+                             hspace=0, wspace=0,
+                             xlabel=None,
+                             ylabel=None):
+    cloud_order = set_cloud_order()
+    f, pTups = set_figure_layout(hspace=hspace, wspace=wspace, xlim=xlim, ylim=ylim, width=width, height=height)
+    for cloud, cdict in cloud_order.items():
+        for reg in cdict['reg']:
+            p = pTups[reg['row']][cdict['col']]
+            index = (df["f_" + wlbl] == 1) & (df[wlbl] > 1.e-4) & (df["region"] == reg['name'])
+            y = np.log10(df[index][wlbl])
+            sns.distplot(y, logbins, color=color, kde=False, axlabel=False, ax=p)
+            p.set_ylabel(" ")
+            p.text(3, 12, reg['name'], fontsize=10, horizontalalignment='right')
+    if ylabel is not None:
+        pTups[2][0].set_ylabel(ylabel)
+    if xlabel is not None:
+        pTups[4][0].set_xlabel(xlabel)
+        pTups[4][1].set_xlabel(xlabel)
+    pTups[0, 0].axis("off")
+    pTups[1, 0].axis("off")
+    plt.tight_layout()
+    if filename is not None:
+        f.savefig(filename, format="eps")
+    return
+
+
+def two_panel_scatter_by_region(df, xcol='clr1', ycol='clr2', filename=None,
+                                xlim=None, ylim=None,
+                                width=6, height=8,
+                                hspace=0, wspace=0,
+                                show_all=True,
+                                ylabel="Log$_{10}\ \lambda F_{\lambda}\ 160 /\lambda F_{\lambda}\ 100$",
+                                xlabel="Log$_{10}\ \lambda F_{\lambda}\ 70 / \lambda F_{\lambda}\ 24$",
+                                scatter_all_args={'color': 'black', 'marker': '.'},
+                                scatter_args={'color': 'blue', 'marker': 'o'}):
+    # assign the subplot number
+    cloud_order = set_cloud_order()
+    f, pTups = set_figure_layout(hspace=hspace, wspace=wspace, xlim=xlim, ylim=ylim, width=width, height=height)
+    #
+    for cloud, cdict in cloud_order.items():
+        for reg in cdict['reg']:
+            p = pTups[reg['row']][cdict['col']]
+            idx = (df['cloud'] == cloud) & (df['region'] == reg['name'])
+            if show_all:
+                p.scatter(df[xcol], df[ycol], **scatter_all_args)
+            p.scatter(df[idx][xcol], df[idx][ycol], **scatter_args)
+            p.set_ylabel(" ")
+            p.text(3.5, -0.1, reg['name'], fontsize=10, horizontalalignment='right')
+    if ylabel is not None:
+        pTups[2][0].set_ylabel(ylabel)
+    if xlabel is not None:
+        pTups[4][0].set_xlabel(xlabel)
+        pTups[4][1].set_xlabel(xlabel)
     pTups[0, 0].axis("off")
     pTups[1, 0].axis("off")
     plt.tight_layout()
