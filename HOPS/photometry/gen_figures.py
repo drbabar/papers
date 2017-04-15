@@ -29,19 +29,24 @@ plt.show()
 
 # LFs by region
 
-reg_df = dl.regions()
-
 with sns.axes_style(fh.style):
+    sns.set_context('paper')
+    fh.two_panel_hist_by_region(phot_tbl, "F70", fh.logbins, color=fh.blue,
+                                hspace=0.05, wspace=0.05,
+                                xlabel=fh.lbl_logF70,
+                                ylabel="Number",
+                                filename="{}LF70_byregion.eps".format(fh.plot_dir))
     sns.despine()
-    fh.LF_by_region(phot_tbl, reg_df, "F70", fh.logbins, color=fh.blue,
-                    hspace=0.05, wspace=0.05,
-                    filename="{}LF70_byregion.eps".format(fh.plot_dir))
 plt.show()
 
+
 with sns.axes_style(fh.style):
-    fh.LF_by_region(phot_tbl, reg_df, "F160", fh.logbins, color=fh.red,
-                    hspace=0.05, wspace=0.05,
-                    filename="{}LF160_byregion.eps".format(fh.plot_dir))
+    sns.set_context('paper')
+    fh.two_panel_hist_by_region(phot_tbl, "F160", fh.logbins, color=fh.red,
+                                hspace=0.05, wspace=0.05,
+                                xlabel=fh.lbl_logF160,
+                                ylabel="Number",
+                                filename="{}LF160_byregion.eps".format(fh.plot_dir))
     sns.despine()
 plt.show()
 
@@ -60,6 +65,7 @@ y_off[5] = +13
 y_off[6] = +12
 y_off[7] = 5
 with sns.axes_style(fh.style):
+    sns.set_context('paper')
     fh.plt_vs_dec(stat_df, y=['med_F70', 'med_F70', 'med_F160', 'med_F160'],
                   color=[fh.blue, fh.blue, fh.red, fh.red],
                   format=['o', '-', 'o', '-'],
@@ -85,16 +91,11 @@ hops_good.loc[:, 'clr2'] = np.log10((160. * hops_good["F160"]) / (100. * hops_go
 
 with sns.axes_style(fh.style):
     sns.set_context('paper')
-    fh.clrclr_by_region(hops_good[hops_good['cloud'] == 'A'],
-                        filename="{}OrionA_clrclr.eps".format(fh.plot_dir),
-                        color=fh.red, all_color=fh.grey)
-plt.show()
-
-with sns.axes_style(fh.style):
-    sns.set_context('paper')
-    fh.clrclr_by_region(hops_good[hops_good['cloud'] == 'B'],
-                        filename="{}OrionB_clrclr.eps".format(fh.plot_dir),
-                        color=fh.red, all_color=fh.grey)
+    fh.two_panel_scatter_by_region(hops_good,
+                                   filename="{}clrclr.eps".format(fh.plot_dir),
+                                   scatter_args={'color': fh.red, 'marker': 'o'},
+                                   scatter_all_args={'color': fh.grey, 'marker': '.'})
+    sns.despine()
 plt.show()
 
 
