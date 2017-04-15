@@ -29,41 +29,26 @@ plt.show()
 
 # LFs by region
 
-reg_df = dl.regions()
-
 with sns.axes_style(fh.style):
     sns.set_context('paper')
-    two_panel_hist_by_region(phot_tbl, "F70", fh.logbins, color=fh.blue,
-                             hspace=0.05, wspace=0.05,
-                             filename="{}LF70_byregion.eps".format(fh.plot_dir))
+    fh.two_panel_hist_by_region(phot_tbl, "F70", fh.logbins, color=fh.blue,
+                                hspace=0.05, wspace=0.05,
+                                xlabel=fh.lbl_logF70,
+                                ylabel="Number",
+                                filename="{}LF70_byregion.eps".format(fh.plot_dir))
     sns.despine()
 plt.show()
 
 
 with sns.axes_style(fh.style):
     sns.set_context('paper')
-    two_panel_hist_by_region(phot_tbl, "F160", fh.logbins, color=fh.red,
-                             hspace=0.05, wspace=0.05,
-                             filename="{}LF160_byregion.eps".format(fh.plot_dir))
+    fh.two_panel_hist_by_region(phot_tbl, "F160", fh.logbins, color=fh.red,
+                                hspace=0.05, wspace=0.05,
+                                xlabel=fh.lbl_logF160,
+                                ylabel="Number",
+                                filename="{}LF160_byregion.eps".format(fh.plot_dir))
     sns.despine()
 plt.show()
-
-
-# with sns.axes_style(fh.style):
-#     sns.set_context('paper')
-#     fh.LF_by_region(phot_tbl, reg_df, "F70", fh.logbins, color=fh.blue,
-#                     hspace=0.05, wspace=0.05, show_all_panels=False,
-#                     filename="{}LF70_byregion.eps".format(fh.plot_dir))
-#     sns.despine()
-# plt.show()
-#
-# with sns.axes_style(fh.style):
-#     sns.set_context('paper')
-#     fh.LF_by_region(phot_tbl, reg_df, "F160", fh.logbins, color=fh.red,
-#                     hspace=0.05, wspace=0.05,
-#                     filename="{}LF160_byregion.eps".format(fh.plot_dir))
-#     sns.despine()
-# plt.show()
 
 
 # Flux vs declination
@@ -110,22 +95,6 @@ with sns.axes_style(fh.style):
                                    filename="{}clrclr.eps".format(fh.plot_dir),
                                    scatter_args={'color': fh.red, 'marker': 'o'},
                                    scatter_all_args={'color': fh.grey, 'marker': '.'})
-    sns.despine()
-plt.show()
-
-with sns.axes_style(fh.style):
-    sns.set_context('paper')
-    fh.clrclr_by_region(hops_good[hops_good['cloud'] == 'A'],
-                        filename="{}OrionA_clrclr.eps".format(fh.plot_dir),
-                        color=fh.red, all_color=fh.grey)
-    sns.despine()
-plt.show()
-
-with sns.axes_style(fh.style):
-    sns.set_context('paper')
-    fh.clrclr_by_region(hops_good[hops_good['cloud'] == 'B'],
-                        filename="{}OrionB_clrclr.eps".format(fh.plot_dir),
-                        color=fh.red, all_color=fh.grey)
     sns.despine()
 plt.show()
 

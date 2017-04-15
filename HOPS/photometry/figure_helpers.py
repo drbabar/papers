@@ -51,50 +51,6 @@ def single_LF(y, ax, color=blue, ylim=[0, 39]):
     ax.set_xticks(np.arange(min_bin, max_bin + 0.5, 0.5))
 
 
-def LF_by_region(phot_tbl, region_df, wlbl, logbins, filename=None,
-                 xlim=None, ylim=None, color="purple", width=6, height=8,
-                 hspace=0, wspace=0, show_all_panels=True):
-    # assign the subplot number
-    # spi = [1, 3, 5, 2, 4, 6, 8, 10]
-    rI = [2, 3, 4, 0, 1, 2, 3, 4]
-    cI = [0, 0, 0, 1, 1, 1, 1, 1]
-    #
-    f, pTups = plt.subplots(nrows=5, ncols=2, sharex=True, sharey=True)
-    f.set_figwidth(width)
-    f.set_figheight(height)
-    f.subplots_adjust(hspace=hspace)
-    f.subplots_adjust(wspace=wspace)
-    if xlim is not None:
-        pTups[0][0].set_xlim(xlim[0], xlim[1])
-    if ylim is not None:
-        pTups[0][0].set_ylim(ylim[0], ylim[1])
-    pTups[2][0].set_ylabel("Number")
-    pTups[4][0].set_xlabel("Log$_{10}\ F_{\lambda}\ $" + wlbl.replace("F", "") + "$\mu$m (Jy)")
-    pTups[4][1].set_xlabel("Log$_{10}\ F_{\lambda}\ $" + wlbl.replace("F", "") + "$\mu$m (Jy)")
-    for i in range(len(region_df["name"])):
-        p = pTups[rI[i]][cI[i]]
-        regname = region_df["name"][i].strip()
-        index = np.where((phot_tbl["f_" + wlbl] == 1) & (phot_tbl[wlbl] > 1.e-4) & (phot_tbl["Dec"] >= region_df["decLow"][i]) & (phot_tbl["Dec"] < region_df["decHigh"][i]))[0]
-        y = np.log10(phot_tbl[wlbl][index])
-        sns.distplot(y, logbins, color=color, kde=False, axlabel=False, ax=p)
-        p.text(3, 12, regname, fontsize=10, horizontalalignment='right')
-    if show_all_panels:
-        orionA = (phot_tbl["f_" + wlbl] == 1) & (phot_tbl[wlbl] > 1.e-4) & (phot_tbl['cloud'] == 'A')
-        y = np.log10(phot_tbl[orionA][wlbl])
-        sns.distplot(y, logbins, color=color, kde=False, axlabel=False, ax=pTups[0][0])
-        pTups[0][0].text(3, 12, "Orion A", fontsize=10, horizontalalignment='right')
-        orionB = (phot_tbl["f_" + wlbl] == 1) & (phot_tbl[wlbl] > 1.e-4) & (phot_tbl['cloud'] == 'B')
-        y = np.log10(phot_tbl[orionB][wlbl])
-        sns.distplot(y, logbins, color=color, kde=False, axlabel=False, ax=pTups[1][0])
-        pTups[1][0].text(3, 13, "Orion B", fontsize=10, horizontalalignment='right')
-    else:
-        pTups[0, 0].axis("off")
-        pTups[1, 0].axis("off")
-    plt.tight_layout()
-    if filename is not None:
-        f.savefig(filename, format="eps")
-
-
 def set_cloud_order():
     return {
         'A': {
@@ -173,7 +129,6 @@ def two_panel_scatter_by_region(df, xcol='clr1', ycol='clr2', filename=None,
     # assign the subplot number
     cloud_order = set_cloud_order()
     f, pTups = set_figure_layout(hspace=hspace, wspace=wspace, xlim=xlim, ylim=ylim, width=width, height=height)
-    #
     for cloud, cdict in cloud_order.items():
         for reg in cdict['reg']:
             p = pTups[reg['row']][cdict['col']]
