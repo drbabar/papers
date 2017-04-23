@@ -25,8 +25,6 @@
 \newcommand{\clrb}{Log$_{10}(\lambda F_\lambda160/\lambda F_\lambda100$)}
 
 
-%% You can insert a short comment on the title page using the command below.
-
 \received{}
 \revised{\today}
 \accepted{}
@@ -35,33 +33,13 @@
 
 %\slugcomment{To appear in Astrophysical Journal}
 
-%% If you wish, you may supply running head information, although
-%% this information may be modified by the editorial offices.
-%% The left head contains a list of authors,
-%% usually a maximum of three (otherwise use et al.).  The right
-%% head is a modified title of up to roughly 44 characters.
-%% Running heads will not print in the manuscript style.
-
 \shorttitle{HOPS Imaging and Photometry}
 \shortauthors{Ali \etal}
 
-%% This is the end of the preamble.  Indicate the beginning of the
-%% paper itself with \begin{document}.
 
 \begin{document}
 
-%% LaTeX will automatically break titles if they run longer than
-%% one line. However, you may use \\ to force a line break if
-%% you desire.
-
-\title{\herschel\thanks{{\it Herschel} is an ESA space observatory with science instruments provided by European-led Principal Investigator consortia and with important participation from NASA.} Orion Protostar Survey (HOPS) Imaging and Photometry Results.}
-
-%% Use \author, \affil, and the \and command to format
-%% author and affiliation information.
-%% Note that \email has replaced the old \authoremail command
-%% from AASTeX v4.0. You can use \email to mark an email address
-%% anywhere in the paper, not just in the front matter.
-%% As in the title, use \\ to force line breaks.
+\title{\herschel\footnote{{\it Herschel} is an ESA space observatory with science instruments provided by European-led Principal Investigator consortia and with important participation from NASA.} Orion Protostar Survey (HOPS) Imaging and Photometry Results.}
 
 \correspondingauthor{Babar Ali}
 \email{bali67@gmail.com}
@@ -100,41 +78,23 @@
 \author{T. L. Wilson}
 \affil{Naval Research Laboratory, Washington, DC, USA}
 
-% \and
-
 \author{Thomas Henning}
 \affil{Max Planck Institute for Astronomy, K\"onigstuhl 17, D-69117 Heidelberg, Germany}
 
-%% Notice that each of these authors has alternate affiliations, which
-%% are identified by the \altaffilmark after each name.  Specify alternate
-%% affiliation information with \altaffiltext, with one command per each
-%% affiliation.
-
-
-%% Mark off your abstract in the ``abstract'' environment. In the manuscript
-%% style, abstract will output a Received/Accepted line after the
-%% title and affiliation information. No date will appear since the author
-%% does not have this information. The dates will be filled in by the
-%% editorial office after submission.
-
 \begin{abstract}
 We summarize and investigate observed far-infrared properties of 410 protostar candidates in the Orion~A and B clouds using data from the \herschel\ Space Observatory.  The observations were taken as part of the Open Time Key Program {\it HOPS} (\herschel\ Orion Protostar Survey, PI: S. T. Megeath).  We find spatial correlations in the observed flux ratios as a function of sub-regions in both the Orion~A and B clouds.  Using simulations, we rule out completeness bias as the sole cause for the observed correlations.  We offer differences in accretion properties and/or evolutionary status as, at least partially, responsible for the observed differences by sub-regions.  Both accretion properties and evolutionary status differences, in turn, may trace fundamental differences in the star-forming conditions in the respective environments.  \end{abstract}
-
-%% Keywords should appear after the \end{abstract} command. The uncommented
-%% example has been keyed in ApJ style. See the instructions to authors
-%% for the journal to which you are submitting your paper to determine
-%% what keyword punctuation is appropriate.
 
 \keywords{stars: protostars --- stars: formation --- infrared: stars --- submillimeter: stars}
 
 \section{Introduction}
 \par
-A comprehensive theory of the formation of stars, which explains the origins of stars from the local raw materials and environmental conditions, is necessary for understanding processes spanning the entire range of cosmic evolution from the formation and evolution of galaxies to the formation of planets \citep{ke2012}.  Thus, a primary goal of current Galactic star-formation research is to develop such a comprehensive theory of star formation. However, many details and key ingredients needed to complete our picture of the star-formation process are not well understood \citep{mo07}.  In particular, one critical aspect, the connection between the raw materials and the final product (the star) is not well characterized \citep{dunham}.  In other words, while the building blocks and the conditions for the formation of stars are provided by the underlying environment the influence of said environmental conditions on the subsequent population is not understood.  The importance of star-formation is underscored by the expansive open and guaranteed-time legacy-class observing programs scheduled on major space-based observatories \spitzer\ \citep{spitzer}, and \herschel\ \footnote{In fact, the former name of \herschel, FIRST was an homage to one of primary objectives of \herschel: the study of the first stars and galaxies in their earliest stages.} \citep{herschel}.
+A comprehensive theory of the formation of stars, which explains the origins of stars from the local raw materials and environmental conditions, is necessary for understanding processes spanning the entire range of cosmic evolution from the formation and evolution of galaxies to the formation of planets \citep{ke2012}.  Thus, a primary goal of current Galactic star-formation research is to develop such a comprehensive theory of star formation. However, many details and key ingredients needed to complete our picture of the star-formation process are not well understood \citep{mo07}.  In particular, one critical aspect, the connection between the raw materials and the final product (the star) is not well characterized \citep{dunham}.  In other words, while the building blocks and the conditions for the formation of stars are provided by the underlying environment, the influence of these building blocks on the subsequent population is not understood.  The importance of star-formation is further underscored by the expansive open and guaranteed-time legacy-class observing programs scheduled on major space-based observatories \spitzer\ \citep{spitzer}, and \herschel\ \footnote{In fact, the former name of \herschel, FIRST was an homage to one of primary objectives of \herschel: the study of the first stars and galaxies in their earliest stages.} \citep{herschel}.
 \par
-Protostars provide useful laboratories for studying said connection between the local environmental conditions and the star itself.  At the protostellar stage, the incipient star is still strongly connected with the local environment, and it is in the protostellar phase that the stellar mass is accumulated and protoplanetary disks are created \citep{c2d09}.
-A detailed characterization of the protostellar evolution, thus, allows us to directly follow the evolution of raw materials into a star.  Yet, despite its fundamental importance, there is no generally accepted theory describing the evolution of a protostar from the initial stages when it is deeply embedded in a cloud core to the late stages when it is transitioning to a pre-main sequence star+disk system \citep{dunham}.
+Protostars provide useful laboratories for studying the link between the local environmental conditions and the star itself.  At the protostellar stage, the incipient star is still strongly connected with the local environment, and it is in the protostellar phase that the stellar mass is accumulated and protoplanetary disks are created \citep{c2d09}.  A detailed characterization of the protostellar evolution, thus, allows us to directly follow the evolution of raw materials into a star.
 \par
-Two items, in particular, make studying protostars difficult:  (i) observational studies must be able to disentangle the degenerate effects of both the environment and the star-formation process itself.  (ii) The presence of dust in the local environment means the amount of extinction in lines-of-sight to star formation regions is abnormally high (few to several tens of magnitudes in the visual) compared to most of the rest of the Galaxy.  To tackle (i), we chose to study a large number of protostars in the Orion molecular cloud complex.  Orion provides several key advantages for such studies.  \cite{orion} identified a rich sample of protostars in Orion from \spitzer.  At 419 pc, Orion is relatively nearby \citep{schlafly} and, thus, allows excellent spatial resolution.  Star formation has been observed in a rich diversity of environments, from isolated cold globules to rich clusters. See, for example, \cite{carpenter}, \cite{feigelson}, \cite{amy2010}.
+Unfortunately, this link to their environment also makes protostars difficult to study.  In particular:  (i) observational studies must be able to disentangle the degenerate effects of both the environment and the star-formation process itself.  And, (ii) the presence of dust in the local environment means the amount of extinction in lines-of-sight to star formation regions is abnormally high (few to several tens of magnitudes in the visual) compared to most of the rest of the Galaxy. 
+\par
+To properly remove the degeneracies from (i), we require sufficient spatial resolution and multi-wavelength measurements to disentangle the various components that make up the protostar and its environment.  We also require sufficiently large number of protostars in a diverse set of environmental conditions to .  to properly tackle (i), the degeneracies between the protostar and its environment.  These requirements limit the best candidate we chose to study a large number of protostars.  Orion provides several key advantages.  \cite{orion} identified a rich sample of protostars in Orion from \spitzer.  At 419 pc, Orion is relatively nearby \citep{schlafly} and, thus, allows excellent spatial resolution.  Star formation has been observed in a rich diversity of environments, from isolated cold globules to rich clusters. See, for example, \cite{carpenter}, \cite{feigelson}, \cite{amy2010}.
 \par
 \spitzer\ and \herschel\ observations, in particular, confirmed long recognized views that far-IR observations of the reprocessed radiation can probe the evolution of protostars \citep{als87}.  The presence of an infalling envelope of gas and dust is the defining characteristic of a protostar. This envelope absorbs the radiation from the central accreting star+disk and reprocesses most of the luminosity into the far-IR \citep{ali}.   Far-IR observations are, therefore, absolutely crucial for efficiently identifying and studying protostars because protostars emit most of their light in those wavelengths.
 \par
