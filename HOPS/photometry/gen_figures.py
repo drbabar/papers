@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import data_loader as dl
@@ -34,9 +35,9 @@ with sns.axes_style(fh.style):
     fh.two_panel_hist_by_region(phot_tbl, "F70", fh.logbins, color=fh.blue,
                                 hspace=0.05, wspace=0.05,
                                 xlabel=fh.lbl_logF70,
-                                ylabel="Number",
-                                filename="{}LF70_byregion.eps".format(fh.plot_dir))
+                                ylabel="Number")
     sns.despine()
+    plt.savefig("{}LF70_byregion.eps".format(fh.plot_dir))
 plt.show()
 
 
@@ -45,9 +46,9 @@ with sns.axes_style(fh.style):
     fh.two_panel_hist_by_region(phot_tbl, "F160", fh.logbins, color=fh.red,
                                 hspace=0.05, wspace=0.05,
                                 xlabel=fh.lbl_logF160,
-                                ylabel="Number",
-                                filename="{}LF160_byregion.eps".format(fh.plot_dir))
+                                ylabel="Number")
     sns.despine()
+    plt.savefig("{}LF160_byregion.eps".format(fh.plot_dir))
 plt.show()
 
 
@@ -72,9 +73,9 @@ with sns.axes_style(fh.style):
                   ylabel="Median $F_{\lambda}$ (Jy)",
                   x_off=x_off, y_off=y_off,
                   xticks=np.arange(-8.5, 2.5, 1),
-                  errors=False,
-                  filename="{}mdFlux_v_dec.eps".format(fh.plot_dir))
+                  errors=False)
     sns.despine()
+    plt.savefig("{}mdFlux_v_dec.eps".format(fh.plot_dir))
 plt.show()
 
 
@@ -92,10 +93,10 @@ hops_good.loc[:, 'clr2'] = np.log10((160. * hops_good["F160"]) / (100. * hops_go
 with sns.axes_style(fh.style):
     sns.set_context('paper')
     fh.two_panel_scatter_by_region(hops_good,
-                                   filename="{}clrclr.eps".format(fh.plot_dir),
                                    scatter_args={'color': fh.red, 'marker': 'o'},
                                    scatter_all_args={'color': fh.grey, 'marker': '.'})
     sns.despine()
+    plt.savefig("{}clrclr.eps".format(fh.plot_dir))
 plt.show()
 
 
@@ -115,9 +116,9 @@ with sns.axes_style(fh.style):
     fh.plt_vs_dec(hops_stats, y=['clr1', 'med_clr1'], color=[fh.blue, fh.red],
                   ylabel="<{}>".format(fh.lbl_clr1),
                   x_off=x_off, y_off=y_off,
-                  xticks=np.arange(-8.5, 2.5, 1),
-                  filename="{}clr1_vs_dec.eps".format(fh.plot_dir))
+                  xticks=np.arange(-8.5, 2.5, 1))
     sns.despine()
+    plt.savefig("{}clr1_vs_dec.eps".format(fh.plot_dir))
 plt.show()
 
 
@@ -129,9 +130,9 @@ with sns.axes_style(fh.style):
     fh.plt_vs_dec(hops_stats, y=['clr2', 'med_clr2'], color=[fh.blue, fh.red],
                   ylabel="<{}>".format(fh.lbl_clr2),
                   x_off=x_off, y_off=y_off, label_size=8,
-                  xticks=np.arange(-8.5, 2.5, 1),
-                  filename="{}clr2_vs_dec.eps".format(fh.plot_dir))
+                  xticks=np.arange(-8.5, 2.5, 1))
     sns.despine()
+    plt.savefig("{}clr2_vs_dec.eps".format(fh.plot_dir))
 plt.show()
 
 
@@ -147,9 +148,9 @@ with sns.axes_style(fh.style):
                   ylabel="Number of Protostars at {}".format(fh.lbl_70um),
                   xticks=np.arange(-8.5, 2.5, 1),
                   x_off=x_off, y_off=y_off, label_size=8,
-                  errors=False,
-                  filename="{}num_vs_dec.eps".format(fh.plot_dir))
+                  errors=False)
     sns.despine()
+    plt.savefig("{}num_vs_dec.eps".format(fh.plot_dir))
 plt.show()
 
 
@@ -169,6 +170,33 @@ with sns.axes_style(fh.style):
     g1 = sns.regplot(y="F70", x="clr2", data=phot_tbl, fit_reg=False, color=fh.red, ax=axs[1])
     g1.set_xlabel(fh.lbl_clr2)
     g1.set_ylabel(" ")
-    plt.savefig("{}f70_v_clr2.eps".format(fh.plot_dir))
     sns.despine()
+    plt.savefig("{}f70_v_clr2.eps".format(fh.plot_dir))
+plt.show()
+
+
+# Comparison of PSF and Aperture photometry
+
+wm_grid = [tuple([w, m]) for m in ["aper", "PSF"] for w in [160, 70]]
+phots = [dl.read_phot_file(w, m) for w, m in wm_grid]
+phots_df = phots[0]
+for df in phots[1:]:
+    phots_df = pd.merge(phots_df, df, on="HOPS", how="outer")
+
+with sns.axes_style(fh.style):
+    sns.set_context('paper')
+    f, axs = plt.subplots(nrows=1, ncols=2, sharex=False, sharey=False)
+    f.set_figwidth(8)
+    f.set_figheight(8)
+    f.subplots_adjust(hspace=0.25)
+    f.subplots_adjust(wspace=0.25)
+    for lam, row, clr, lbl in zip(['70', '160'], [0, 1], [fh.blue, fh.red], [fh.lbl_F70um, fh.lbl_F160um]):
+        x = phots_df['P{}'.format(lam)]
+        y = phots_df['PSF_{}'.format(lam)]
+        axs[row].plot(np.sort(x), np.sort(x), linestyle='--', color='black')
+        axs[row].scatter(x, y, color=clr)
+        axs[row].set_xlabel("{}, Aperture Photometry".format(lbl))
+        axs[row].set_ylabel("{}, PSF Photometry".format(lbl))
+    sns.despine()
+    plt.savefig("{}aper_vs_psf.eps".format(fh.plot_dir))
 plt.show()

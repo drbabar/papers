@@ -30,6 +30,7 @@ logbins = np.arange(nbins, dtype=np.float) * bin_step + min_bin
 lbl_70um = "70 $\mu$m"
 lbl_160um = "160 $\mu$m"
 lbl_F70um = "$F_{\lambda}70\ $(Jy)"
+lbl_F160um = "$F_{\lambda}160\ $(Jy)"
 lbl_logF70 = "Log$_{10}\ F_{\lambda}70\ $(Jy)"
 lbl_logF160 = "Log$_{10}\ F_{\lambda}160\ $(Jy)"
 lbl_clr1 = "Log$_{10}\ F_{\lambda}70 / F_{\lambda}24$"
@@ -232,6 +233,7 @@ def plt_vs_dec(hops_stats, filename=None, y=['clr1', 'med_clr1'],
                label_bkd=grey, label_size=None,
                xticks=None, yticks=None,
                AB_dec_boundary=AB_dec_boundary):
+    plt.figure()
     if isinstance(y, list):
         y0 = y[0]
         ncols = len(y)

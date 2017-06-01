@@ -42,6 +42,14 @@ def regions():
     return reg_df.rename(columns=cols_renamer)
 
 
+def read_phot_file(wavelength, method):
+    suff = 'final'
+    if method == 'aper':
+        suff = 'summary'
+    fname = "data/HOPS_PACS{}_{}_photometry_{}_083016.txt".format(wavelength, method, suff)
+    return pd.read_csv(fname, comment="#", skiprows=1, delim_whitespace=True, header=1)
+
+
 def data_loader(photometry_file="data/photometry_table.csv", use_the_force=False, verbose=True):
     exists = os.path.exists(photometry_file)
 
@@ -73,15 +81,7 @@ def data_loader(photometry_file="data/photometry_table.csv", use_the_force=False
         # (3) Find out if the final photometry in the Vizier table
         #     PSF or Aperture
 
-        def read_phot_file(wavelength, method):
-            suff = 'final'
-            if method == 'aper':
-                suff = 'summary'
-            fname = "data/HOPS_PACS{}_{}_photometry_{}_083016.txt".format(wavelength, method, suff)
-            return pd.read_csv(fname, comment="#", skiprows=1, delim_whitespace=True, header=1)
-
         wm_grid = [tuple([w, m]) for m in ["aper", "PSF"] for w in [160, 70]]
-
         phots = [read_phot_file(w, m) for w, m in wm_grid]
         phots_df = phots[0]
         for df in phots[1:]:
@@ -109,5 +109,23 @@ def data_loader(photometry_file="data/photometry_table.csv", use_the_force=False
         if verbose:
             print("Reading prepared data table {}".format(photometry_file))
         phot_tbl = pd.read_csv(photometry_file)
+
+    # corrections to aperture/psf method based on corrections by looking
+    # at file data/HOPS_PACS70_PACS160_photometry_methods_summary_053017.txt
+    # provided by E. Furlan
+    corrections = [
+        {'HOPS': 19, 'fixes': {'m_F70': 'A', 'm_F160': 'P'}},
+        {'HOPS': 316, 'fixes': {'m_F70': 'P', 'm_F160': 'P'}}
+    ]
+    for d in corrections:
+        idx = phot_tbl[phot_tbl['HOPS'] == d['HOPS']].index[0]
+        for k, v in d['fixes'].items():
+            phot_tbl.loc[idx, k] = v
+
+    # Reset flag 3 to 1 because we have a new column specifically for
+    # listing aperture or psf photometry as source.
+    for ff in ['f_F70', 'f_F160']:
+        idx = phot_tbl[phot_tbl[ff] > 2].index
+        phot_tbl.loc[idx, ff] = 1
 
     return phot_tbl

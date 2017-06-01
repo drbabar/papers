@@ -107,7 +107,9 @@ This paper is one in a series describing the results from HOPS (\eg\ Stutz \etal
 \section{Protostar sample \& observations}
 \label{sec:sample}
 \par
-The \spitzer\ Orion protostar sample was defined and described by \cite{orion}.  We selected a flux-limited subset of 280 protostars for follow-up with \herschel\  for HOPS.  The number of targets for the HOPS follow-up was limited solely by signal-to-noise ratio (S/N) considerations.  Our original sample of 280 \herschel\ targets were segregated in distinct spatial tiles to optimize observing.  The tiles were assigned consecutive three-digit integer group numbers starting with the number 0 (zero).  The spatial sizes of the tiles ranged from 3\arcmin\ (most common) to 7\arcmin).  The protostar candidates selected for our \herschel\ survey are referred to as the HOPS sources and are uniquely identified by a 3-digit integer number starting with the number 0 (zero).   Ultimately, we detected additional candidates previously identified in the \spitzer\ survey whose spatial location happened to be within the field-of-view of the observation tile.  These sources, however, were not part of the original HOPS candidate list because their estimated fluxes were below our S/N limit.  Further, \cite{pbrpaper} found protostars and candidates not identified in the \spitzer\ list; See section~\ref{sec:protostars} for more details.  Our final catalog appends the original sample of 280 targets with the additions mentioned above.  There are a total of 410 sources in the final sample included here.
+The \spitzer\ Orion protostar sample was defined and described by \cite{orion}.  For HOPS, we selected a flux-limited subset of 372 protostars for follow-up with \herschel.  These are all targets of HOPS, spread over the Orion A and B molecular clouds from declinations of $-8^\circ50'$ to $1^\circ54'$ and from right ascensions of $5^{\rm h}33^{\rm m}$ to $5^{\rm h}55^{\rm m}$.  The \herschel\ observations were designed to detect those protostars with an expected 70~\micron\ flux in excess of 42 mJy.  The number of targets for the HOPS follow-up was limited solely by signal-to-noise ratio (S/N) considerations.   Thirty three (33) objects in this initial list were not observed with \herschel. An additional four are duplicates of existing sources, in which scattered light detected with Spitzer/IRAC turned out to be associated with a nearby point source.  See \citet{furlan} for further details.
+\par
+Our original sample of 372 \herschel\ targets were segregated in distinct spatial tiles to optimize observing.  The tiles were assigned consecutive three-digit integer group numbers starting with the number 0 (zero).  The spatial sizes of the tiles ranged from 3\arcmin\ (most common) to 7\arcmin).  The protostar candidates selected for our \herschel\ survey are referred to as the HOPS sources and are uniquely identified by a 3-digit integer number starting with the number 0 (zero).   Ultimately, we detected additional 22 candidates previously identified in the \spitzer\ survey whose spatial location happened to be within the field-of-view of the observation tile.  These sources, however, were not part of the original HOPS candidate list because their estimated fluxes were below our S/N limit.  Further, \cite{pbrpaper} found protostars and candidates not identified in the \spitzer\ list; See section~\ref{sec:protostars} for more details.  Our final catalog appends the original sample of 280 targets with the additions mentioned above.  There are a total of 410 sources in the final sample included here.
 \par
 \cite{furlan}\ classified 330 of these sources as young stellar objects (YSOs) and the remaining as unlikely to be protostars and/or sources not observed or detected by PACS at 70~micron.  For their analysis, \cite{furlan} focused on the 330 HOPS targets which have complete \spitzer\ and \herschel\ data (at least a PACS 70~\micron\ detection) and most were originally considered protostars by \cite{orion}.  The objective of this contribution is to provide complete data on all sources from our original sample of 280 protostars as well as the additional targets detected in our images.  Thus, we have included all 410 objects in this contribution.
 
@@ -162,9 +164,11 @@ We used the \starfinder\ package \citep{starfinder} for fitting PSF profiles  an
 \par
 As mentioned earlier, the \starfinder\ PSF amplitudes must be adjusted to remove any systematic bias in PSF photometry.  To that end, we processed PACS observations of flux standard stars taken in the same manner as our program stars.  Then, we used \starfinder\ on these fields using exactly the same parameter set used for the HOPS program images.  The measured PSF amplitudes for the flux standards and knowledge about their actual fluxes provides the necessary calibration between the two.
 
-\subsection{Final photometry selection}
+\subsection{Final photometry selection and errors}
 \label{sec-eyeballs}
 We inspected each HOPS protostar image individually.  First, visual inspection was used to identify contaminants: {\it e.g.}\ other point sources within the aperture radius, or strong nebular features that are likely to affect photometry.  Once identified as problematic, we considered both PSF-fitted and aperture photometry in the context of the overall spectral energy distribution (SED) for the source.  Aperture photometry for sources with strong contaminants is rejected in favor of PSF-fitted photometry.
+\par
+The errors for the photometry are already reported by \cite{furlan}.  These were obtained as follows: (1) sources for which were observed multiple times, the error is simply 1-standard deviation computed from all measurements.  (2) Aperture photometry errors are computed at the maximum of 5\% of the measured flux or the root-mean-square (RMS) variation in the intensity values within the sky annulus.  And, (3) \cite{furlan} adopted 10\% of the measure flux as the error for the PSF photometry.
 
 \subsection{100~\micron\ photometry}
 \label{sec:gb100um}
@@ -381,6 +385,13 @@ HIPE is a joint development by the Herschel Science Ground Segment Consortium, c
 \par
 The HOPS observational catalog.
 \input{observation_table.tex}
+
+\section{Aperture and PSF photometry comparison}
+\begin{figure*}[ht]
+\centering
+\plotone{figures/aper_vs_psf.eps}
+\caption{Comparison of photometry from the two techniques used here. The dashed line shows the trend if the two values were identical.\label{fig:aper_psf_comp}}
+\end{figure*}
 
 
 \begin{thebibliography}{}
