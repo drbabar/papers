@@ -96,7 +96,7 @@ for i, row in tex_tbl.iterrows():
     print(line)
 print("\\enddata")
 print("\\tablenotetext{a}{The unique observation identifier for Herschel.}")
-print("\\tablenotetext{b}{0=not observed, 1=measured, 2=upper limit, 3=PSF-fitted photometry}")
+print("\\tablenotetext{b}{0=erroneous designation or not observed, 1=measured, 2=upper limit}")
 print("\\tablenotetext{c}{A=Aperture photometry, P=PSF-fitted photometry}")
 print("\\end{deluxetable*}")
 print("\\end{longrotatetable}")
