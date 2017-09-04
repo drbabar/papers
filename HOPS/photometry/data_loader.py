@@ -129,3 +129,7 @@ def data_loader(photometry_file="data/photometry_table.csv", use_the_force=False
         phot_tbl.loc[idx, ff] = 1
 
     return phot_tbl
+
+
+def load_psf_aper_phot_comparison_table(table='data/HOPS_PACS70_aper_PSF_photometry_comp_090613.txt'):
+    return pd.read_csv(table, comment='#', header=0, delim_whitespace=True)

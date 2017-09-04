@@ -14,6 +14,7 @@ if not os.path.exists(plot_dir):
 blue = sns.xkcd_rgb["denim blue"]
 red = sns.xkcd_rgb["pale red"]
 grey = sns.xkcd_rgb["light grey"]
+grey2 = sns.xkcd_rgb["dark grey"]
 style = "ticks"
 
 # LF pars
