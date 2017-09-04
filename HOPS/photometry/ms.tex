@@ -387,12 +387,17 @@ The HOPS observational catalog.
 \input{observation_table.tex}
 
 \section{Aperture and PSF photometry comparison}
+\par
+We used both aperture and PDF photometry for all HOPS targets as described in the main text (Section~\ref{sec:phot}).  Figure~\ref{fig:aper_psf_comp} shows the comparison between the two techniques.  We have additionally classified all HOPS objects as one of: (i) 'Isolated', meaning no companion or extended emission is present in the aperture or the sky annulus.  (ii) 'Nearby companion or companions', meaning one or more stars may influence the photometry because of their presence in the aperture or the sky annulus.  (iii) And, 'Strong background emission', meaning strong spatially extended emission from local gas and dust is detected within the aperture or the sky annulus.  The classifications were made visually in the 70~\micron\ images.
+\par
+Figure~\ref{fig:aper_psf_comp} shows that the disagreement between the two techniques is most noticeable for sources with either companions or background emission contamination.  These visual classification was used to determine which method is ultimately used for each HOPS target.
 \begin{figure*}[ht]
 \centering
 \plotone{figures/aper_vs_psf.eps}
-\caption{Comparison of photometry from the two techniques used here. The dashed line shows the trend if the two values were identical.\label{fig:aper_psf_comp}}
+\caption{Comparison of photometry from the two techniques used here. The dashed line shows the trend if the two values were identical.\label{fig:aper_psf_comp}.  See text for more details on local environment classification.}
 \end{figure*}
 
+\clearpage
 
 \begin{thebibliography}{}
 \bibitem[Adams, Lada, \& Shu (1987)]{als87} Adams, F., Lada, C. \& Shu, F., 1987, \apj, 312, 788
