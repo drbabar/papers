@@ -45,26 +45,26 @@
 \email{bali67@gmail.com}
 
 \author{Babar Ali}
-\affil{Space Sciences Institute, Boulder, CO}
+\affil{Space Sciences Institute, Boulder, CO, USA}
 
 \author{William J. Fischer}
-\altaffiliation{NASA Postdoctoral Program Fellow.}
-\affil{NASA Goddard Space Flight Center, Greenbelt, MD, USA.}
+\affil{Space Telescope Science Institute, 3700 San Martin Drive, Baltimore, MD 21218, USA.}
 
 \author{S. Thomas Megeath}
 \affil{Ritter Astrophysical Observatory, Department of Physics and Astronomy, University of Toledo, Toledo, OH, USA}
 
 \author{Elise Furlan}
-\affil{Infrared Processing and Analysis Center, California Institute of Technology, 770 S. Wilson Ave., Pasadena, CA 91125, USA}
+\affil{IPAC, California Institute of Technology, 1200 E. California Blvd., Pasadena, CA 91125, USA}
 
 \author{Amelia M. Stutz}
 \affil{Max Planck Institute for Astronomy, K\"onigstuhl 17, D-69117 Heidelberg, Germany}
+\affil{Departmento de Astronom\'ia, Facultad Ciencias F\'isicas y Matem\'aticas, Universidad de Concepci\'on, Concepci\'on, Chile}
 
 \author{Thomas Stanke}
 \affil{European Southern Observatory, Garching bei Munchen, Germany}
 
 \author{John J. Tobin}
-\affil{Hubble Fellow, National Radio Astronomy Observatory, Charlottesville, VA 22903}
+\affil{Homer L. Dodge Department of Physics and Astronomy, University of Oklahoma, Norman, OK, USA}
 
 \author{James Di Francesco}
 \affil{Senior Research Officer, National Research Council Canada, Vancouver, Canada}
@@ -82,13 +82,15 @@
 \affil{Max Planck Institute for Astronomy, K\"onigstuhl 17, D-69117 Heidelberg, Germany}
 
 \begin{abstract}
-We summarize and investigate observed far-infrared properties of 410 protostar candidates in the Orion~A and B clouds using data from the \herschel\ Space Observatory.  The observations were taken as part of the Open Time Key Program {\it HOPS} (\herschel\ Orion Protostar Survey, PI: S. T. Megeath).  We find spatial correlations in the observed flux ratios as a function of sub-regions in both the Orion~A and B clouds.  Using simulations, we rule out completeness bias as the sole cause for the observed correlations.  We offer differences in accretion properties and/or evolutionary status as, at least partially, responsible for the observed differences by sub-regions.  Both accretion properties and evolutionary status differences, in turn, may trace fundamental differences in the star-forming conditions in the respective environments.  \end{abstract}
+We summarize our investigation of the observed far-infrared properties of 410 protostar candidates in the Orion~A and B clouds using data from the \herschel\ Space Observatory.  The observations were taken as part of the Open Time Key Program {\it HOPS} (\herschel\ Orion Protostar Survey, PI: S. T. Megeath).  The photometry portion of HOPS, discussed here, focused on 70 and 160~\micron photometry with the \herschel/PACS instrument.  This work presents our observations, data processing and map-making, and photometry analyses using both aperture and point spread function fitted photometry.
+\par
+We find spatial correlations in the observed flux ratios as a function of sub-regions in both the Orion~A and B clouds.  Using simulations, we rule out completeness bias as the sole cause for the observed correlations.  We offer differences in accretion properties and/or evolutionary status as, at least partially, responsible for the observed differences by sub-regions.  Both accretion properties and evolutionary status differences, in turn, may trace fundamental differences in the star-forming conditions in the respective environments.  \end{abstract}
 
 \keywords{stars: protostars --- stars: formation --- infrared: stars --- submillimeter: stars}
 
 \section{Introduction}
 \par
-A comprehensive theory of the formation of stars, which explains the origins of stars from the local raw materials and environmental conditions, is necessary for understanding processes spanning the entire range of cosmic evolution from the formation and evolution of galaxies to the formation of planets \citep{ke2012}.  Given such far-reaching significance, a primary goal of current Galactic star-formation research has been to develop such a comprehensive narrative of star formation.  This importance is further underscored by the expansive open and guaranteed-time legacy-class observing programs scheduled on major space-based observatories \spitzer\ \citep{spitzer}, and \herschel\ \footnote{In fact, the former name of \herschel, FIRST was an homage to one of primary objectives of \herschel: the study of the first stars and galaxies in their earliest stages.} \citep{herschel}.
+A comprehensive theory of the formation of stars, which explains the origins of stars from the local raw materials and environmental conditions, is necessary for understanding processes spanning the entire range of cosmic evolution from the formation and evolution of galaxies to the formation of planets \citep{ke2012}.  Given such far-reaching significance, a primary goal of current Galactic star-formation research has been to develop such a comprehensive narrative of star formation.  This importance is further underscored by the expansive open and guaranteed-time legacy-class observing programs scheduled on major space-based observatories such as \spitzer\ \citep{spitzer}, and \herschel\ \footnote{In fact, the former name of \herschel, FIRST was an homage to one of primary objectives of \herschel: the study of the first stars and galaxies in their earliest stages.} \citep{herschel}.
 \par
 However, many details and key ingredients  are not well understood \citep{mo07}, and are needed to complete our picture of the star formation process.  In particular, one critical aspect, the connection between the raw building blocks and the conditions for star formation provided by the underlying environment and its impact on the final product (the star) is not well characterized \citep{dunham}.
 \par
@@ -107,11 +109,11 @@ This paper is one in a series describing the results from HOPS (\eg\ Stutz \etal
 \section{Protostar sample \& observations}
 \label{sec:sample}
 \par
-The \spitzer\ Orion protostar sample was defined and described by \cite{orion}.  For HOPS, we selected a flux-limited subset of 372 protostars for follow-up with \herschel.  These are all targets of HOPS, spread over the Orion A and B molecular clouds from declinations of $-8^\circ50'$ to $1^\circ54'$ and from right ascensions of $5^{\rm h}33^{\rm m}$ to $5^{\rm h}55^{\rm m}$.  The \herschel\ observations were designed to detect those protostars with an expected 70~\micron\ flux in excess of 42 mJy.  The number of targets for the HOPS follow-up was limited solely by signal-to-noise ratio (S/N) considerations.   Thirty three (33) objects in this initial list were not observed with \herschel. An additional four are duplicates of existing sources, in which scattered light detected with Spitzer/IRAC turned out to be associated with a nearby point source.  See \citet{furlan} for further details.
+The \spitzer\ Orion protostar sample was defined and described by \cite{orion}.  For HOPS, we selected a flux-limited subset of 372 protostars for follow-up with the \herschel\ Photodetector Array Camera and Spectrometer (PACS) instrument \cite{pacs}.  The  HOPS targets are spatially spread over the Orion A and B molecular clouds from declinations of $-8^\circ50'$ to $1^\circ54'$ and from right ascensions of $5^{\rm h}33^{\rm m}$ to $5^{\rm h}55^{\rm m}$.  The \herschel\ observations were designed to detect those protostars with an expected 70~\micron\ flux in excess of 42 mJy.  The number of targets for the HOPS follow-up was limited solely by signal-to-noise ratio (S/N) considerations.   Thirty three (33) objects in this initial list were not observed with \herschel. An additional four are duplicates of existing sources, in which scattered light detected with Spitzer/IRAC turned out to be associated with a nearby point source.  See \citet{furlan} for further details.
 \par
-Our original sample of 372 \herschel\ targets were segregated in distinct spatial tiles to optimize observing.  The tiles were assigned consecutive three-digit integer group numbers starting with the number 0 (zero).  The spatial sizes of the tiles ranged from 3\arcmin\ (most common) to 7\arcmin).  The protostar candidates selected for our \herschel\ survey are referred to as the HOPS sources and are uniquely identified by a 3-digit integer number starting with the number 0 (zero).   Ultimately, we detected additional 22 candidates previously identified in the \spitzer\ survey whose spatial location happened to be within the field-of-view of the observation tile.  These sources, however, were not part of the original HOPS candidate list because their estimated fluxes were below our S/N limit.  Further, \cite{pbrpaper} found protostars and candidates not identified in the \spitzer\ list; See section~\ref{sec:protostars} for more details.  Our final catalog appends the original sample of 280 targets with the additions mentioned above.  There are a total of 410 sources in the final sample included here.
+Our original sample of 372 \herschel\ targets were segregated in distinct spatial tiles to optimize observing.  The tiles were assigned consecutive three-digit integer group numbers starting with the number 0 (zero).  The spatial sizes of the tiles ranged from 3\arcmin\ (most common) to 7\arcmin).  The protostar candidates selected for our \herschel\ survey are referred to as the HOPS sources and are uniquely identified by a 3-digit integer number starting with the number 0 (zero).   Ultimately, we detected additional 22 candidates previously identified in the \spitzer\ survey whose spatial location happened to be within the field-of-view of the observation tile.  These sources, however, were not part of the original HOPS candidate list because their estimated fluxes were below our S/N limit.  Further, \cite{pbrpaper} found protostars and candidates not identified in the \spitzer\ list; See section~\ref{sec:protostars} for more details.  Our final catalog appends the original sample of 372 targets with the additions mentioned above.  There are a total of 410 sources in the final sample included here.
 \par
-\cite{furlan}\ classified 330 of these sources as young stellar objects (YSOs) and the remaining as unlikely to be protostars and/or sources not observed or detected by PACS at 70~micron.  For their analysis, \cite{furlan} focused on the 330 HOPS targets which have complete \spitzer\ and \herschel\ data (at least a PACS 70~\micron\ detection) and most were originally considered protostars by \cite{orion}.  The objective of this contribution is to provide complete data on all sources from our original sample of 280 protostars as well as the additional targets detected in our images.  Thus, we have included all 410 objects in this contribution.
+\cite{furlan}\ classified 330 of these sources as young stellar objects (YSOs) and the remaining as unlikely to be protostars and/or sources not observed or detected by PACS at 70~micron.  For their analysis, \cite{furlan} focused on the 330 HOPS targets which have complete \spitzer\ and \herschel\ data (at least a PACS 70~\micron\ detection) and most were originally considered protostars by \cite{orion}.  The objective of this contribution is to provide complete data on all sources from our original sample of 372 protostars as well as the additional targets detected in our images.  Thus, we have included all 410 objects in this contribution.
 
 \subsection{Observing strategy}
 \label{sec:obs}
@@ -127,7 +129,7 @@ Table~\ref{tbl:obs} lists the final combined catalog (see below for detailed des
 \par
 We also investigated HOPS images for additional protostar candidates that might have been missed by our earlier efforts.  \citet{pbrpaper} required a 160~\micron\ detection for improved reliability, and implemented additional thresholds to reduce contamination from extra-galactic sources.  As \citet{pbrpaper} showed, \spitzer\ observations did not identify, or in rare cases, detect all protostars in Orion.  Hence, the possibility remains that additional sources, perhaps with detections only in the 70~\micron\ filter, lurk within our data.  With detection in only one or two bands, however, it is increasingly difficult to properly characterize these sources and distinguish them from foreground or background objects.  It is likely necessary that additional protostar candidates here will require follow-up observations or analysis.  Nonetheless, these sources may impact statistical studies, and are tabulated.
 \par
-The columns have the following meaning in Table~\ref{tbl:obs}.  Column~1 lists the unique three-digit HOPS identifier.  Columns~2~\&~3 list the J2000 equatorial coordinates as measured on the \herschel\ images and as reported by the DAOPHOT find algorithm \citep{psfphotometry}.  Column~4 lists the \herschel-assigned unique observation identifiers (OBSIDs, two per group as described in Section~\ref{sec:obs}).  Column~5 lists the 3-digit group number mentioned above.  Columns~6-13 list the \herschel\ photometry for the three Herschel/PACS bands.  Note these results were already reported by \cite{furlan} and are repeated here for convenience.  Our photometry procedure is described in Section~\ref{sec:phot}.  The 70~\micron\ and 160~\micron\ flux densities are from our program.  The 100~\micron\ fluxes are added from the larger survey of the Orion region from the the Gould-Belt Key Program \citep{gb}.  The extraction of the 100\micron\ photometry is discussed in \cite{pbrpaper}.  Each photometry value is described by three columns: the first provides the photometry value itself, the second, labelled flag, has the following meaning:   flag = 0 means the source is not observed. flag =1 means the photometry, as quoted, is the measured value,  and flag = 2 means the value is an upper limit.  The third column, 'Method' identifies whether the measurement is from aperture photometry (A) or PSF-photometry (P).  Column~14 identifies the sub-region within the Orion~A and B clouds to which the HOPS source belongs.  The sub-region definitions are listed in Table~\ref{tbl:regions}.  Finally, Column~15 lists the Universal Time (UT) observation day for the observations.  Note: when a source was detected in more than one group (tile) we combined the measurements as a simple average.
+The columns have the following meaning in Table~\ref{tbl:obs}.  Column~1 lists the unique three-digit HOPS identifier.  Columns~2~\&~3 list the J2000 equatorial coordinates as measured on the \herschel\ images and as reported by the DAOPHOT find algorithm \citep{psfphotometry}.  Column~4 lists the \herschel-assigned unique observation identifiers (OBSIDs, two per group as described in Section~\ref{sec:obs}).  Column~5 lists the 3-digit group number mentioned above.  Columns~6-13 list the \herschel\ photometry for the three Herschel/PACS bands.  Note these results were already reported by \cite{furlan} and are repeated here for convenience.  Our photometry procedure is described in Section~\ref{sec:phot}.  The 70~\micron\ and 160~\micron\ flux densities are from our program.  The 100~\micron\ fluxes are added from the larger survey of the Orion region from the the Gould-Belt Key Program \citep{gb}.  The extraction of the 100\micron\ photometry is discussed in \cite{pbrpaper}.  Each photometry value is described by three columns: the first provides the photometry value itself, the second, labelled flag, has the following meaning:   flag = 0 means the source is not observed. flag =1 means the photometry, as quoted, is the measured value,  flag = 2 means the value is an upper limit, and flag=3 means the source is not detected.  The third column, 'Method' identifies whether the measurement is from aperture photometry (A) or PSF-photometry (P).  Column~14 identifies the sub-region within the Orion~A and B clouds to which the HOPS source belongs.  The sub-region definitions are listed in Table~\ref{tbl:regions}.  Finally, Column~15 lists the Universal Time (UT) observation day for the observations.  Note: when a source was detected in more than one group (tile) we combined the measurements as a simple average.
 
 \section{Data Processing \& Map-making}
 \label{sec:dp}
@@ -166,7 +168,7 @@ As mentioned earlier, the \starfinder\ PSF amplitudes must be adjusted to remove
 
 \subsection{Final photometry selection and errors}
 \label{sec-eyeballs}
-We inspected each HOPS protostar image individually.  First, visual inspection was used to identify contaminants: {\it e.g.}\ other point sources within the aperture radius, or strong nebular features that are likely to affect photometry.  Once identified as problematic, we considered both PSF-fitted and aperture photometry in the context of the overall spectral energy distribution (SED) for the source.  Aperture photometry for sources with strong contaminants is rejected in favor of PSF-fitted photometry.
+When a source was observed in more than one group, we averaged the individual measurements to obtain the final estimate of its flux.  We also suspected that aperture photometry results will be contaminated by the presence of other nearby sources and spatially extended nebular emission.  Thus, we inspected each HOPS protostar image individually.  First, visual inspection was used to identify contaminants: {\it e.g.}\ other point sources within the aperture radius, or strong nebular features that are likely to affect photometry.  Once identified as problematic, we considered both PSF-fitted and aperture photometry in the context of the overall spectral energy distribution (SED) for the source.  Aperture photometry for sources with strong contaminants is rejected in favor of PSF-fitted photometry.  However, we opted to use the aperture photometry as an upper limit estimate of the source's flux if neither aperture, nor PSF photometry techniques yielded reliable results.
 \par
 The errors for the photometry are already reported by \cite{furlan}.  These were obtained as follows: (1) sources for which were observed multiple times, the error is simply 1-standard deviation computed from all measurements.  (2) Aperture photometry errors are computed at the maximum of 5\% of the measured flux or the root-mean-square (RMS) variation in the intensity values within the sky annulus.  And, (3) \cite{furlan} adopted 10\% of the measure flux as the error for the PSF photometry.
 
@@ -221,7 +223,7 @@ The 160~\micron\ FDs suggest a trend of increasingly bright sources towards lowe
 \subsection{Flux ratio distribution}
 \label{sec:fratio}
 \par
-Flux ratios (colors) are better suited for determining differences as a function of source type than the flux itself because flux ratios depend on the shape of the source SED \citep{ali}. We investigated two different flux ratios using the combined Spitzer, HOPS and Gould-Belt photometry: \clra, and \clrb. Figure~\ref{fig:clrclr} shows the flux-ratio vs flux-ratio plots segregated by sub-region for Orion A and Orion B. We do not include data with upper limits for these plots (sources with flag value = 2 in Table~\ref{tbl:obs}). The red symbols show the colors for the sub-region identified in the sub-panel, and the black symbols show the colors for the entire sample. As with the median of the FD, we note an apparent systematic change in the observed flux ratios relative to the entire population in both Orion~A and Orion~B.
+Flux ratios (colors) are better suited for determining differences as a function of source type than the flux itself because flux ratios depend on the shape of the source SED \citep{ali}. We investigated two different flux ratios using the combined Spitzer, HOPS and Gould-Belt photometry: \clra, and \clrb. Figure~\ref{fig:clrclr} shows the flux-ratio vs flux-ratio plots segregated by sub-region for Orion A and Orion B. We do not include data with upper limits for these plots (sources with flag value = 2 in Table~\ref{tbl:obs}). The red symbols show the colors for the sub-region identified in the sub-panel, and the gay symbols show the colors for the entire sample. As with the median of the FD, we note an apparent systematic change in the observed flux ratios relative to the entire population in both Orion~A and Orion~B.
 \par
 We quantitatively explore this apparent trend further in Figures~\ref{fig:clr1_v_dec}~\&~\ref{fig:clr2_v_dec}. These Figures show the mean and median colors for each of the sub-regions as a function of the mean declination for all sources belonging to the respective sub-region.  Since the sub-regions are vertically segregated in both the Orion~A and B clouds, declination is a useful proxy for sub-region.
 \par
@@ -229,7 +231,7 @@ In Orion~A, the median and mean colors of the sub-regions become systematically 
 
 \subsection{Number of protostars}
 \label{sec:numbers}
-Table~\ref{tbl:regions} and Figure~\ref{fig:num_v_dec} list and show the numbers of HOPS protostars as a function of sub-region within the Orion~A and Orion~B clouds.  Since the proto-stellar phase lasts $<$1~Myr \citep{orion}, the observed number of protostars may trace the sites where high rates of recent star-formation are transpiring.  We note, however, that \citet{pbrpaper} find that Orion~B, which has the fewest protostars, have the most PBRs, suggesting youth.
+Table~\ref{tbl:regions} and Figure~\ref{fig:num_v_dec} list and show the numbers of HOPS protostars as a function of sub-region within the Orion~A and Orion~B clouds.  The LDN~1641 S and C clouds have the largest number of protostars.  In Orion~A, the ONC-S region has the lowest number of protostars in our \herschel\ observed sample.  And, in Orion~B, NGC~2068 has the largest number of protostars, more than double that of NGC~2023/2024 or LDN~1622 regions.  LDN~1622 sub-region has the fewest number of protostars of all Orion sub-regions in our sample.  Since the proto-stellar phase lasts $<$1~Myr \citep{orion}, the observed number of protostars may trace the sites where recent star-formation are transpiring.  We note, however, that \citet{pbrpaper} find that Orion~B, which has the fewest protostars, have the most PBRs, suggesting youth.
 
 \section{Discussion}
 \label{sec:discussion}
@@ -318,7 +320,7 @@ HIPE is a joint development by the Herschel Science Ground Segment Consortium, c
 \begin{figure*}[ht]
 \centering
 \plotone{figures/clrclr.eps}
-\caption{The observed distribution of colors in Orion~A (right panel) and Orion~B (left panel) segregated by sub-regions.  The sub-region is identified in each respective panel.  Solid red symbols show the colors for the sub-region.  Smaller black open symbols show the distribution for all sources in the combined Orion~A and Orion~B samples. \label{fig:clrclr}}
+\caption{The observed distribution of colors in Orion~A (right panel) and Orion~B (left panel) segregated by sub-regions.  The sub-region is identified in each respective panel.  Solid red symbols show the colors for the sub-region.  Small grey symbols show the distribution for all sources in the combined Orion~A and Orion~B samples. \label{fig:clrclr}}
 \end{figure*}
 
 \clearpage
@@ -343,7 +345,7 @@ HIPE is a joint development by the Herschel Science Ground Segment Consortium, c
 \begin{figure*}[ht]
 \centering
 \plotone{figures/clr1_vs_dec.eps}
-\caption{The mean (black circles) and median (red circles) value of \clra\ color as a function of declination.  The associated sub-region is labelled above the data points themselves.  The vertical bars show the respective standard deviation.  \label{fig:clr1_v_dec}}
+\caption{The mean (blue circles) and median (red circles) value of \clra\ color as a function of declination.  The associated sub-region is labelled above the data points themselves.  The vertical bars show the respective standard deviation.  \label{fig:clr1_v_dec}}
 \end{figure*}
 
 \clearpage
@@ -388,7 +390,7 @@ The HOPS observational catalog.
 
 \section{Aperture and PSF photometry comparison}
 \par
-We used both aperture and PDF photometry for all HOPS targets as described in the main text (Section~\ref{sec:phot}).  Figure~\ref{fig:aper_psf_comp} shows the comparison between the two techniques.  We have additionally classified all HOPS objects as one of: (i) 'Isolated', meaning no companion or extended emission is present in the aperture or the sky annulus.  (ii) 'Nearby companion or companions', meaning one or more stars may influence the photometry because of their presence in the aperture or the sky annulus.  (iii) And, 'Strong background emission', meaning strong spatially extended emission from local gas and dust is detected within the aperture or the sky annulus.  The classifications were made visually in the 70~\micron\ images.
+We used both aperture and PSF photometry for all HOPS targets as described in the main text (Section~\ref{sec:phot}).  Figure~\ref{fig:aper_psf_comp} shows the comparison between the two techniques.  We have additionally classified all HOPS objects as one of: (i) 'Isolated', meaning no companion or extended emission is present in the aperture or the sky annulus.  (ii) 'Nearby companion or companions', meaning one or more stars may influence the photometry because of their presence in the aperture or the sky annulus.  (iii) And, 'Strong background emission', meaning strong spatially extended emission from local gas and dust is detected within the aperture or the sky annulus.  The classifications were made visually in the 70~\micron\ images.
 \par
 Figure~\ref{fig:aper_psf_comp} shows that the disagreement between the two techniques is most noticeable for sources with either companions or background emission contamination.  These visual classification was used to determine which method is ultimately used for each HOPS target.
 \begin{figure*}[ht]
@@ -428,7 +430,7 @@ Figure~\ref{fig:aper_psf_comp} shows that the disagreement between the two techn
 \bibitem[Reipurth \etal\ (2014)]{binaries} Reipurth, B. \etal, 2014 in PPVI, p 267.
 \bibitem[Roussel (2012)]{scanamorphos} Roussel, H., 2012, eprint arXiv:1205.2576
 \bibitem[Schlafly \etal (2014)]{schlafly} Schlafly, E. F., Green, G., Finkbeiner, D. P., Rix, H.-W., Bell, E. F., Burgett, W. S., Chambers, K. C., Draper, P. W., Hodapp, K. W., Kaiser, N., Magnier, E. A., Martin, N. F., Metcalfe, N., Price, P. A., \& Tonry, J. L. 2014, ApJ, 786, 29
-\bibitem[Stanke \etal\ (2015)]{thomas} Stanke, T., \etal, 2015, in prep.
+\bibitem[Stanke \etal\ (2018)]{thomas} Stanke, T., \etal, 2015, in prep.
 \bibitem[Stetson (1987)]{psfphotometry} Stetson, P., B., 1987, PASP, 99, 191
 \bibitem[Stutz \etal\ (2010)]{amy2010} Stutz, A., Launhardt, R., Linz, H., Krause, O., Henning, T., Kainulainen, J., Nielbock, M., Steinacker, J.,\& Andre, P. 2010, A\&A, 518, L87
 \bibitem[Stutz \etal\ (2013)]{pbrpaper} Stutz, A., \etal, 2013, ApJ, 767, 36
