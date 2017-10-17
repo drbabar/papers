@@ -18,7 +18,7 @@ with sns.axes_style(fh.style):
     f.subplots_adjust(hspace=0)
     p1.text(-2, 30, fh.lbl_70um)
     p2.text(-2, 30, fh.lbl_160um)
-    plt.xlabel("Log$_{10}\ F_{\lambda}\ $(Jy)")
+    plt.xlabel("Log$_{10}\ F_{\nu}\ $(Jy)")
     p1.set_ylabel("Number")
     p2.set_ylabel("Number")
     plt.tight_layout()
@@ -69,7 +69,7 @@ with sns.axes_style(fh.style):
     fh.plt_vs_dec(stat_df, y=['med_F70', 'med_F70', 'med_F160', 'med_F160'],
                   color=[fh.blue, fh.blue, fh.red, fh.red],
                   format=['o', '-', 'o', '-'],
-                  ylabel="Median $F_{\lambda}$ (Jy)",
+                  ylabel="Median $F_{\nu}$ (Jy)",
                   x_off=x_off, y_off=y_off,
                   xticks=np.arange(-8.5, 2.5, 1),
                   errors=False,

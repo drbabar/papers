@@ -30,10 +30,10 @@ logbins = np.arange(nbins, dtype=np.float) * bin_step + min_bin
 
 lbl_70um = "70 $\mu$m"
 lbl_160um = "160 $\mu$m"
-lbl_F70um = "$F_{\lambda}70\ $(Jy)"
-lbl_F160um = "$F_{\lambda}160\ $(Jy)"
-lbl_logF70 = "Log$_{10}\ F_{\lambda}70\ $(Jy)"
-lbl_logF160 = "Log$_{10}\ F_{\lambda}160\ $(Jy)"
+lbl_F70um = "$F_{\nu}70\ $(Jy)"
+lbl_F160um = "$F_{\nu}160\ $(Jy)"
+lbl_logF70 = "Log$_{10}\ F_{\nu}70\ $(Jy)"
+lbl_logF160 = "Log$_{10}\ F_{\nu}160\ $(Jy)"
 lbl_clr1 = "Log$_{10}\ F_{\lambda}70 / F_{\lambda}24$"
 lbl_clr2 = "Log$_{10}\ F_{\lambda}160 / F_{\lambda}100$"
 
