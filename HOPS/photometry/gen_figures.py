@@ -13,12 +13,13 @@ y70 = np.log10(phot_tbl[fh.data_selector(phot_tbl, "F70")]["F70"])
 y160 = np.log10(phot_tbl[fh.data_selector(phot_tbl, "F160")]["F160"])
 with sns.axes_style(fh.style):
     f, (p1, p2) = plt.subplots(2, sharex=True, sharey=True)
-    fh.single_LF(y70, p1, color=fh.blue, ylim=[0, 39])
-    fh.single_LF(y160, p2, color=fh.red, ylim=[0, 39])
+    fh.single_LF(y70, p1, color=fh.blue, ylim=[0, 80])
+    fh.single_LF(y160, p2, color=fh.red, ylim=[0, 80])
+    # fh.single_LF(y160, p2, color=fh.red, ylim=[0, 39])
     f.subplots_adjust(hspace=0)
     p1.text(-2, 30, fh.lbl_70um)
     p2.text(-2, 30, fh.lbl_160um)
-    plt.xlabel("Log$_{10}\ F_{\nu}\ $(Jy)")
+    plt.xlabel("Log$_{10}\ F_{\\nu}\ $(Jy)")
     p1.set_ylabel("Number")
     p2.set_ylabel("Number")
     plt.tight_layout()
@@ -69,7 +70,7 @@ with sns.axes_style(fh.style):
     fh.plt_vs_dec(stat_df, y=['med_F70', 'med_F70', 'med_F160', 'med_F160'],
                   color=[fh.blue, fh.blue, fh.red, fh.red],
                   format=['o', '-', 'o', '-'],
-                  ylabel="Median $F_{\nu}$ (Jy)",
+                  ylabel="Median $F_{\\nu}$ (Jy)",
                   x_off=x_off, y_off=y_off,
                   xticks=np.arange(-8.5, 2.5, 1),
                   errors=False,
