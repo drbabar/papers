@@ -1,6 +1,10 @@
 import os
+import numpy as np
 import pandas as pd
 from astroquery.vizier import Vizier
+
+
+C = 2.99792458e8  # speed of light in m / s
 
 
 def obsid_reader():
@@ -50,6 +54,12 @@ def read_phot_file(wavelength, method):
     return pd.read_csv(fname, comment="#", skiprows=1, delim_whitespace=True, header=1)
 
 
+def compute_color(lambda_1_um, Fjy_1, lambda_2_um, Fjy_2):
+        nu_1 = C / (lambda_1_um * 1.e-6)
+        nu_2 = C / (lambda_2_um * 1.e-6)
+        return np.log10((nu_1 * Fjy_1) / (nu_2 * Fjy_2))
+
+
 def data_loader(photometry_file="data/photometry_table.csv", use_the_force=False, verbose=True):
     exists = os.path.exists(photometry_file)
 
@@ -96,8 +106,8 @@ def data_loader(photometry_file="data/photometry_table.csv", use_the_force=False
         phot_tbl = pd.merge(phot_tbl, meth_df[["HOPS", "m_F70", "m_F160"]], on="HOPS", how="left")
 
         # Compute colors
-        phot_tbl['clr1'] = np.log10((70. * phot_tbl["F70"]) / (24. * phot_tbl["F24"]))
-        phot_tbl['clr2'] = np.log10((160. * phot_tbl["F160"]) / (100. * phot_tbl["F100"]))
+        phot_tbl['clr1'] = compute_color(70, phot_tbl["F70"], 24., phot_tbl["F24"])
+        phot_tbl['clr2'] = compute_color(160, phot_tbl["F160"], 100., phot_tbl["F100"])
 
         if verbose:
             print("done.")
