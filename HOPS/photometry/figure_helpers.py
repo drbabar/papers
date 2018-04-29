@@ -34,8 +34,8 @@ lbl_F70um = "$F_{\\nu}70\ $(Jy)"
 lbl_F160um = "$F_{\\nu}160\ $(Jy)"
 lbl_logF70 = "Log$_{10}\ F_{\\nu}70\ $(Jy)"
 lbl_logF160 = "Log$_{10}\ F_{\\nu}160\ $(Jy)"
-lbl_clr1 = "Log$_{10}\ F_{\lambda}70 / F_{\lambda}24$"
-lbl_clr2 = "Log$_{10}\ F_{\lambda}160 / F_{\lambda}100$"
+lbl_clr1 = "Log$_{10}\ F_{\\nu}70 / F_{\\nu}24$"
+lbl_clr2 = "Log$_{10}\ F_{\\nu}160 / F_{\\nu}100$"
 
 # helper functions
 
@@ -124,8 +124,8 @@ def two_panel_scatter_by_region(df, xcol='clr1', ycol='clr2', filename=None,
                                 width=6, height=8,
                                 hspace=0, wspace=0,
                                 show_all=True,
-                                ylabel="Log$_{10}\ \lambda F_{\lambda}\ 160 /\lambda F_{\lambda}\ 100$",
-                                xlabel="Log$_{10}\ \lambda F_{\lambda}\ 70 / \lambda F_{\lambda}\ 24$",
+                                ylabel="Log$_{10}\ \\nu F_{\\nu}160\ /\ \\nu F_{\\nu}100$",
+                                xlabel="Log$_{10}\ \\nu F_{\\nu}70\ /\ \\nu F_{\\nu}24$",
                                 scatter_all_args={'color': 'black', 'marker': '.'},
                                 scatter_args={'color': 'blue', 'marker': 'o'}):
     # assign the subplot number
@@ -214,8 +214,8 @@ def clrclr_by_region(hops_df, filename=None,
         pTups[i].set_ylabel(" ")
         pTups[i].text(2.8, -0.1, name)
         i = i + 1
-    pTups[-1].set_xlabel("Log$_{10}\ \lambda F_{\lambda}\ 70 / \lambda F_{\lambda}\ 24$")
-    pTups[int(n_grps / 2)].set_ylabel("Log$_{10}\ \lambda F_{\lambda}\ 160 /\lambda F_{\lambda}\ 100$")
+    pTups[-1].set_xlabel("Log$_{10}\ \nu F_{\nu}\ 70 / \nu F_{\nu}\ 24$")
+    pTups[int(n_grps / 2)].set_ylabel("Log$_{10}\ \nu F_{\nu}\ 160 /\nu F_{\nu}\ 100$")
     plt.xlim(xlims[0], xlims[1])
     plt.ylim(ylims[0], ylims[1])
     plt.subplots_adjust(wspace=wspace, hspace=hspace)
@@ -229,7 +229,7 @@ def clrclr_by_region(hops_df, filename=None,
 
 def plt_vs_dec(hops_stats, filename=None, y=['clr1', 'med_clr1'],
                color=[blue, red], format=['o', 'o'], errors=True,
-               ylabel="<Log$_{10}\ F_{\lambda}\ 70 / F_{\lambda}\ 24$>",
+               ylabel="<Log$_{10}\ F_{\nu}\ 70 / F_{\nu}\ 24$>",
                x_off=None, y_off=None,
                label_bkd=grey, label_size=None,
                xticks=None, yticks=None,
